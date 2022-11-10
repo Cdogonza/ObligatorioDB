@@ -21,8 +21,9 @@ public class Loggin extends javax.swing.JFrame {
     /**
      * Creates new form Loggin
      */
-    public static String user= "";
-    public static String rolUser= "";
+    public static String user = "";
+    public static String rolUser = "";
+
     public Loggin() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -87,37 +88,25 @@ public class Loggin extends javax.swing.JFrame {
             try {
                 Statement stat = conec.createStatement();
                 ResultSet consulta = stat.executeQuery("select * from user where id_number='" + user + "'");
-                if(consulta.next()){
-                    do{
+                if (consulta.next()) {
+                    do {
                         String pas = consulta.getString("password");
-                    if (pass.equals(pas)) {
-                        this.user = consulta.getString("firstName")+" "+consulta.getString("istatName");
-                        this.rolUser = consulta.getString("rolID");
-                        String rol = consulta.getString("rolID");
-                        if (rol.contains("ADMIN")) {
+                        if (pass.equals(pas)) {
+                            this.user = consulta.getString("firstName") + " " + consulta.getString("istatName");
+                            this.rolUser = consulta.getString("rolID");                            
                             this.dispose();
-                            Principal admin = new Principal();
-                            admin.setVisible(true);
+                            Principal ppal = new Principal();
+                            ppal.setVisible(true);
+                            
+                        } else {
+                            JOptionPane.showMessageDialog(null, "ERROR", "LOS DATOS INGRESADOS NO SON CORRECTOS", JOptionPane.ERROR_MESSAGE);
                         }
-                        if (rol.contains("JEFE")) {
-                            this.dispose();
-                            Jefe jefe = new Jefe();
-                            jefe.setVisible(true);
-                        }
-                        if (rol.contains("EMP")) {
-                            this.dispose();
-                            Empleado emp = new Empleado();
-                            emp.setVisible(true);
-                    }
-                }else{
-                        JOptionPane.showMessageDialog(null, "ERROR", "LOS DATOS INGRESADOS NO SON CORRECTOS", JOptionPane.ERROR_MESSAGE);
-                    }
-                
-                    }while (consulta.next());
-                    
-                }else {
-                        JOptionPane.showMessageDialog(null, "USUARIO NO EXISTE", "ERROR", JOptionPane.ERROR_MESSAGE);
-                    }
+
+                    } while (consulta.next());
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "USUARIO NO EXISTE", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(Loggin.class.getName()).log(Level.SEVERE, null, ex);
             }

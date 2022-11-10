@@ -4,6 +4,15 @@
  */
 package obligatorio;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author gpaz1
@@ -11,16 +20,65 @@ package obligatorio;
 public class Principal extends javax.swing.JFrame {
 
     /**
-     * Creates new form Profesores
+     * Creates new form Principal
+     * @param rol
      */
-    public String ValidacionRol(String rol){
-       return rol;
+    public void ValidacionRol(String rol) {
+
+        if (rol.contains("ADMIN")) {
+            panelEmp.setVisible(false);
+            panelPpal.setVisible(false);
+            panelAdmin.setVisible(true);
+            cargarUsers();
+        }
+        if (rol.contains("JEFE")) {
+            this.dispose();
+            Jefe jefe = new Jefe();
+            jefe.setVisible(true);
+        }
+        if (rol.contains("EMP")) {
+            panelAdmin.setVisible(false);
+            panelPpal.setVisible(false);
+            panelEmp.setVisible(true);
+        }
+
     }
-    public void CargaUser(){
+    public void cargarUsers() {
+        String sql = "SELECT * FROM user;";
+
+        String columnas[] = {"id_number", "firstName","istatName","rolID","admissionDate","Contact"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas); 
+
+        String[] registros = new String[6];
+        try {
+            Statement stat = conec.createStatement();
+            ResultSet rs = stat.executeQuery(sql);
+            while (rs.next()) {
+                registros[0] = rs.getString("id_number");
+                registros[1] = rs.getString("firstName");
+                registros[2] = rs.getString("istatName");
+                registros[3] = rs.getString("rolID");
+                registros[4] = rs.getString("admissionDate");
+                registros[5] = rs.getString("contact");
+
+                modelo.addRow(registros);
+            }
+            tblUser.setModel(modelo);
+        } catch (SQLException ex) {
+            Logger.getLogger(Loggin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void CargaUser() {
         backround.setOpaque(true);
         lblname.setText(Loggin.user);
-        lblrol.setText("ROL: "+ Loggin.rolUser);
+        lblrol.setText("ROL: " + Loggin.rolUser);
+        panelAdmin.setVisible(false);
+        panelEmp.setVisible(false);
+        panelPpal.setVisible(true);
+        
     }
+
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -36,24 +94,52 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnAdmin = new javax.swing.JButton();
+        btnEMP = new javax.swing.JButton();
         lblrol = new javax.swing.JLabel();
         lbliconuser = new javax.swing.JLabel();
         lblname = new javax.swing.JLabel();
         backround = new javax.swing.JLabel();
+        panelEmp = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        panelAdmin = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblUser = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        panelPpal = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(831, 520));
         setMinimumSize(new java.awt.Dimension(831, 520));
-        setPreferredSize(new java.awt.Dimension(831, 520));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Administrador");
-        jButton1.setActionCommand("btnPrincipal");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 160, 40));
+        btnAdmin.setBackground(new java.awt.Color(255, 255, 255));
+        btnAdmin.setForeground(new java.awt.Color(0, 0, 0));
+        btnAdmin.setText("Administrador");
+        btnAdmin.setActionCommand("btnPrincipal");
+        btnAdmin.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 160, 40));
+
+        btnEMP.setBackground(new java.awt.Color(255, 255, 255));
+        btnEMP.setForeground(new java.awt.Color(0, 0, 0));
+        btnEMP.setText("Empleado");
+        btnEMP.setActionCommand("btnPrincipal");
+        btnEMP.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEMP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEMPActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEMP, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 160, 40));
 
         lblrol.setForeground(new java.awt.Color(255, 255, 255));
         lblrol.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -70,19 +156,109 @@ public class Principal extends javax.swing.JFrame {
         backround.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         getContentPane().add(backround, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 6, 220, 470));
 
+        panelEmp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setText("EMPLEADOS");
+        panelEmp.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 27, -1, -1));
+
+        jButton2.setText("Facturar");
+        panelEmp.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 160, 50));
+
+        jButton4.setText("Consultar Precio");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        panelEmp.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 160, 50));
+
+        jButton3.setText("Modificar mis datos");
+        panelEmp.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 160, 50));
+
+        getContentPane().add(panelEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 580, 470));
+
+        panelAdmin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblUser.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "id_number", "Nombre", "Apellido", "Rol", "Fecha_Ingreso", "Contacto"
+            }
+        ));
+        jScrollPane1.setViewportView(tblUser);
+
+        panelAdmin.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 540, 140));
+
+        jLabel1.setText("TABLA USUARIOS");
+        panelAdmin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+
+        jLabel2.setText("ADMINISTRADORES");
+        panelAdmin.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, 20));
+
+        getContentPane().add(panelAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 570, 470));
+
+        jLabel4.setFont(new java.awt.Font("Maiandra GD", 1, 48)); // NOI18N
+        jLabel4.setText("BIENVENIDOS");
+        panelPpal.add(jLabel4);
+
+        getContentPane().add(panelPpal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 600, 470));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
+       if(Loggin.rolUser.contains("EMP")){
+           JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
+       }else if(Loggin.rolUser.contains("ADMIN")){
+           ValidacionRol(Loggin.rolUser);
+       }
+        
+    }//GEN-LAST:event_btnAdminActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnEMPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEMPActionPerformed
+        if(Loggin.rolUser.contains("ADMIN")){       
+            ValidacionRol("EMP");
+        }else{
+            
+            ValidacionRol("EMP");
+        }
+        
+        
+    }//GEN-LAST:event_btnEMPActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backround;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnAdmin;
+    private javax.swing.JButton btnEMP;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbliconuser;
     private javax.swing.JLabel lblname;
     private javax.swing.JLabel lblrol;
+    private javax.swing.JPanel panelAdmin;
+    private javax.swing.JPanel panelEmp;
+    private javax.swing.JPanel panelPpal;
+    private javax.swing.JTable tblUser;
     // End of variables declaration//GEN-END:variables
+Conexion_MySql conexion = new Conexion_MySql();
+    Connection conec = conexion.ConectarBasedeDatos();
 }
