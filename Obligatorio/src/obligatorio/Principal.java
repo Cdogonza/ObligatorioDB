@@ -21,33 +21,38 @@ public class Principal extends javax.swing.JFrame {
 
     /**
      * Creates new form Principal
+     *
      * @param rol
      */
     public void ValidacionRol(String rol) {
 
         if (rol.contains("ADMIN")) {
             panelEmp.setVisible(false);
+            panelJefe.setVisible(false);
             panelPpal.setVisible(false);
             panelAdmin.setVisible(true);
             cargarUsers();
         }
         if (rol.contains("JEFE")) {
-            this.dispose();
-            Jefe jefe = new Jefe();
-            jefe.setVisible(true);
+            panelAdmin.setVisible(false);
+            panelPpal.setVisible(false);
+            panelEmp.setVisible(false);
+            panelJefe.setVisible(true);
         }
         if (rol.contains("EMP")) {
             panelAdmin.setVisible(false);
+            panelJefe.setVisible(false);
             panelPpal.setVisible(false);
             panelEmp.setVisible(true);
         }
 
     }
+
     public void cargarUsers() {
         String sql = "SELECT * FROM user;";
 
-        String columnas[] = {"id_number", "firstName","istatName","rolID","admissionDate","Contact"};
-        DefaultTableModel modelo = new DefaultTableModel(null, columnas); 
+        String columnas[] = {"id_number", "firstName", "istatName", "rolID", "admissionDate", "Contact"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
 
         String[] registros = new String[6];
         try {
@@ -71,12 +76,14 @@ public class Principal extends javax.swing.JFrame {
 
     public void CargaUser() {
         backround.setOpaque(true);
+        btnSalir.setOpaque(true);
         lblname.setText(Loggin.user);
         lblrol.setText("ROL: " + Loggin.rolUser);
         panelAdmin.setVisible(false);
         panelEmp.setVisible(false);
         panelPpal.setVisible(true);
-        
+        panelJefe.setVisible(false);
+
     }
 
     public Principal() {
@@ -95,7 +102,9 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         btnAdmin = new javax.swing.JButton();
-        btnEMP = new javax.swing.JButton();
+        btnJefe = new javax.swing.JButton();
+        btnEMP1 = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
         lblrol = new javax.swing.JLabel();
         lbliconuser = new javax.swing.JLabel();
         lblname = new javax.swing.JLabel();
@@ -112,6 +121,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         panelPpal = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        panelJefe = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(831, 520));
@@ -129,17 +140,40 @@ public class Principal extends javax.swing.JFrame {
         });
         getContentPane().add(btnAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 160, 40));
 
-        btnEMP.setBackground(new java.awt.Color(255, 255, 255));
-        btnEMP.setForeground(new java.awt.Color(0, 0, 0));
-        btnEMP.setText("Empleado");
-        btnEMP.setActionCommand("btnPrincipal");
-        btnEMP.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnEMP.addActionListener(new java.awt.event.ActionListener() {
+        btnJefe.setBackground(new java.awt.Color(255, 255, 255));
+        btnJefe.setForeground(new java.awt.Color(0, 0, 0));
+        btnJefe.setText("Jefatura");
+        btnJefe.setActionCommand("btnPrincipal");
+        btnJefe.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnJefe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEMPActionPerformed(evt);
+                btnJefeActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEMP, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 160, 40));
+        getContentPane().add(btnJefe, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 160, 40));
+
+        btnEMP1.setBackground(new java.awt.Color(255, 255, 255));
+        btnEMP1.setForeground(new java.awt.Color(0, 0, 0));
+        btnEMP1.setText("Empleado");
+        btnEMP1.setActionCommand("btnPrincipal");
+        btnEMP1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEMP1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEMP1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEMP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 160, 40));
+
+        btnSalir.setBackground(new java.awt.Color(249, 2, 59));
+        btnSalir.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(0, 0, 0));
+        btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 140, 40));
 
         lblrol.setForeground(new java.awt.Color(255, 255, 255));
         lblrol.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -208,32 +242,64 @@ public class Principal extends javax.swing.JFrame {
 
         getContentPane().add(panelPpal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 600, 470));
 
+        jLabel6.setText("JEFATURA");
+        panelJefe.add(jLabel6);
+
+        getContentPane().add(panelJefe, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 600, 470));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
-       if(Loggin.rolUser.contains("EMP")){
-           JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
-       }else if(Loggin.rolUser.contains("ADMIN")){
-           ValidacionRol(Loggin.rolUser);
-       }
-        
+        if (Loggin.rolUser.contains("EMP")||Loggin.rolUser.contains("JEFE")) {
+            JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (Loggin.rolUser.contains("ADMIN")) {
+            ValidacionRol(Loggin.rolUser);
+        }
+
     }//GEN-LAST:event_btnAdminActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void btnEMPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEMPActionPerformed
-        if(Loggin.rolUser.contains("ADMIN")){       
+    private void btnJefeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJefeActionPerformed
+        if (Loggin.rolUser.contains("EMP")) {
+            JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (Loggin.rolUser.contains("ADMIN")) {
+            ValidacionRol("JEFE");
+        } else {
+
+            ValidacionRol("JEFE");
+        }
+
+
+    }//GEN-LAST:event_btnJefeActionPerformed
+
+    private void btnEMP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEMP1ActionPerformed
+       if (Loggin.rolUser.contains("JEFE")) {
+            JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (Loggin.rolUser.contains("ADMIN")) {
             ValidacionRol("EMP");
-        }else{
-            
+        } else {
+
             ValidacionRol("EMP");
         }
-        
-        
-    }//GEN-LAST:event_btnEMPActionPerformed
+    }//GEN-LAST:event_btnEMP1ActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+
+        panelAdmin.setVisible(false);
+        panelEmp.setVisible(false);
+        panelPpal.setVisible(true);
+        panelJefe.setVisible(false);
+        conexion.DesconectarBasedeDatos();
+        this.dispose();
+       
+        Loggin log = new Loggin();
+        log.setVisible(true);
+
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,7 +308,9 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backround;
     private javax.swing.JButton btnAdmin;
-    private javax.swing.JButton btnEMP;
+    private javax.swing.JButton btnEMP1;
+    private javax.swing.JButton btnJefe;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -250,12 +318,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbliconuser;
     private javax.swing.JLabel lblname;
     private javax.swing.JLabel lblrol;
     private javax.swing.JPanel panelAdmin;
     private javax.swing.JPanel panelEmp;
+    private javax.swing.JPanel panelJefe;
     private javax.swing.JPanel panelPpal;
     private javax.swing.JTable tblUser;
     // End of variables declaration//GEN-END:variables
