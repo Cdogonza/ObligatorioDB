@@ -13,6 +13,9 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Profesores
      */
+    public String ValidacionRol(String rol){
+       return rol;
+    }
     public void CargaUser(){
         backround.setOpaque(true);
         lblname.setText(Loggin.user);
