@@ -24,9 +24,9 @@ public class Administrador extends javax.swing.JFrame {
      * Creates new form Adminstrador
      */
     public void cargarUsers() {
-        String sql = "SELECT * FROM user;";
+        String sql = "SELECT * FROM personas;";
 
-        String columnas[] = {"id_number", "firstName","istatName","rolID","admissionDate","Contact"};
+        String columnas[] = {"user_id", "nombres","apellidos","direccion","ciudad","departamento"};
         DefaultTableModel modelo = new DefaultTableModel(null, columnas); 
 
         String[] registros = new String[6];
@@ -34,12 +34,12 @@ public class Administrador extends javax.swing.JFrame {
             Statement stat = conec.createStatement();
             ResultSet rs = stat.executeQuery(sql);
             while (rs.next()) {
-                registros[0] = rs.getString("id_number");
-                registros[1] = rs.getString("firstName");
-                registros[2] = rs.getString("istatName");
-                registros[3] = rs.getString("rolID");
-                registros[4] = rs.getString("admissionDate");
-                registros[5] = rs.getString("contact");
+                registros[0] = rs.getString("user_id");
+                registros[1] = rs.getString("nombres");
+                registros[2] = rs.getString("apellidos");
+                registros[3] = rs.getString("direccion");
+                registros[4] = rs.getString("ciudad");
+                registros[5] = rs.getString("departamento");
 
                 modelo.addRow(registros);
             }
@@ -68,15 +68,16 @@ public class Administrador extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUser = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
-        setMaximumSize(new java.awt.Dimension(400, 300));
         setMinimumSize(new java.awt.Dimension(400, 300));
-        setPreferredSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel1.setText("USUARIOS");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
 
+        tblUser.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         tblUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -92,8 +93,13 @@ public class Administrador extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 660, 140));
 
-        jLabel2.setText("ADMINISTRADORES");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
+        jLabel2.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
+        jLabel2.setText("Administradores");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo-login-web.jpg"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 400));
     }// </editor-fold>//GEN-END:initComponents
     /**
      * @param args the command line arguments
@@ -102,6 +108,7 @@ public class Administrador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblUser;
     // End of variables declaration//GEN-END:variables
