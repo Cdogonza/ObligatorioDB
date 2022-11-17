@@ -8,6 +8,8 @@ import com.mysql.cj.conf.PropertyKey;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -132,16 +134,16 @@ public class Loggin extends javax.swing.JFrame {
             System.out.println("DEBE INGRESAR USUARIO Y PASSWORD");
         } else {
             String user = txtUser.getText().toUpperCase();
-            String pass = txtPass.getText();
+            String pass = hashPwd(txtPass.getText());
             try {
                 Statement stat = conec.createStatement();
-                ResultSet consulta = stat.executeQuery("select * from PERSONAS where user_id='" + user + "'");
+                ResultSet consulta = stat.executeQuery("select * from PERSONAS join PERMISOS on PERSONAS.user_id=PERMISOS.user_id where PERSONAS.user_id='" + user + "'");
                 if (consulta.next()) {
                     do {
                         String pas = consulta.getString("hashpwd");
                         if (pass.equals(pas)) {
                             this.user = consulta.getString("nombres") + " " + consulta.getString("apellidos");
-                            //this.rolUser = consulta.getString("rol_id");                            
+                            this.rolUser = consulta.getString("rol_neg_id");                            
                             this.dispose();
                             Principal ppal = new Principal();
                             ppal.setVisible(true);
@@ -179,12 +181,7 @@ public class Loggin extends javax.swing.JFrame {
     private void txtPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPassMouseClicked
                // TODO add your handling code here:
     }//GEN-LAST:event_txtPassMouseClicked
-    private void SetImageLabel(JLabel labelName, String root){
-        ImageIcon image= new ImageIcon (root); 
-        Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
-        labelName.setIcon(icon);
-        this.repaint();
-    }
+    
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
@@ -207,4 +204,35 @@ public class Loggin extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     Conexion_MySql conexion = new Conexion_MySql();
     Connection conec = conexion.ConectarBasedeDatos();
+    
+    private String hashPwd(String pass){
+        String passwordToHash = pass;
+        String generatedPassword = null;
+
+        try 
+        {
+          // Create MessageDigest instance for MD5
+          MessageDigest md = MessageDigest.getInstance("MD5");
+
+          // Add password bytes to digest
+          md.update(passwordToHash.getBytes());
+
+          // Get the hash's bytes
+          byte[] bytes = md.digest();
+
+          // This bytes[] has bytes in decimal format. Convert it to hexadecimal format
+          StringBuilder sb = new StringBuilder();
+          for (int i = 0; i < bytes.length; i++) {
+            sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+          }
+
+          // Get complete hashed password in hex format
+          generatedPassword = sb.toString();
+          return generatedPassword;
+        } catch (NoSuchAlgorithmException e) {
+          e.printStackTrace();
+        }
+        return generatedPassword;
+    }
+    
 }
