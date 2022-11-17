@@ -26,20 +26,20 @@ public class Principal extends javax.swing.JFrame {
      */
     public void ValidacionRol(String rol) {
 
-        if (rol.contains("ADMIN")) {
+        if (rol.contains("admin")) {
             panelEmp.setVisible(false);
             panelJefe.setVisible(false);
             panelPpal.setVisible(false);
             panelAdmin.setVisible(true);
             cargarUsers();
         }
-        if (rol.contains("JEFE")) {
+        if (rol.contains("jefe")) {
             panelAdmin.setVisible(false);
             panelPpal.setVisible(false);
             panelEmp.setVisible(false);
             panelJefe.setVisible(true);
         }
-        if (rol.contains("EMP")) {
+        if (rol.contains("encargado")) {
             panelAdmin.setVisible(false);
             panelJefe.setVisible(false);
             panelPpal.setVisible(false);
@@ -49,7 +49,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     public void cargarUsers() {
-        String sql = "SELECT * FROM personas;";
+        String sql = "SELECT * FROM PERSONAS;";
 
         String columnas[] = {"user_id", "nombres", "apellidos", "direccion", "ciudad", "departamento"};
         DefaultTableModel modelo = new DefaultTableModel(null, columnas);
@@ -247,7 +247,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
         jLabel2.setText("ADMINISTRADORES");
-        panelAdmin.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, 20));
+        panelAdmin.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 0, 520, 70));
 
         getContentPane().add(panelAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 570, 470));
 
@@ -271,9 +271,9 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
-        if (Loggin.rolUser.contains("EMP")||Loggin.rolUser.contains("JEFE")) {
+        if (Loggin.rolUser.contains("encargado")||Loggin.rolUser.contains("jefe")) {
             JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
-        } else if (Loggin.rolUser.contains("ADMIN")) {
+        } else if (Loggin.rolUser.contains("admin")) {
             ValidacionRol(Loggin.rolUser);
         }
 
@@ -284,26 +284,26 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnJefeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJefeActionPerformed
-        if (Loggin.rolUser.contains("EMP")) {
+        if (Loggin.rolUser.contains("encargado")) {
             JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
-        } else if (Loggin.rolUser.contains("ADMIN")) {
-            ValidacionRol("JEFE");
+        } else if (Loggin.rolUser.contains("admin")) {
+            ValidacionRol("jefe");
         } else {
 
-            ValidacionRol("JEFE");
+            ValidacionRol("jefe");
         }
 
 
     }//GEN-LAST:event_btnJefeActionPerformed
 
     private void btnEMP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEMP1ActionPerformed
-       if (Loggin.rolUser.contains("JEFE")) {
+       if (Loggin.rolUser.contains("jefe")) {
             JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
-        } else if (Loggin.rolUser.contains("ADMIN")) {
-            ValidacionRol("EMP");
+        } else if (Loggin.rolUser.contains("admin")) {
+            ValidacionRol("encargado");
         } else {
 
-            ValidacionRol("EMP");
+            ValidacionRol("encargado");
         }
     }//GEN-LAST:event_btnEMP1ActionPerformed
 

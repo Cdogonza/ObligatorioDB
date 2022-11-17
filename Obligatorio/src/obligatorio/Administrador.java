@@ -24,9 +24,9 @@ public class Administrador extends javax.swing.JFrame {
      * Creates new form Adminstrador
      */
     public void cargarUsers() {
-        String sql = "SELECT * FROM personas;";
+        String sql = "SELECT * FROM PERSONAS join PERMISOS on PERSONAS.user_id=PERMISOS.user_id;";
 
-        String columnas[] = {"user_id", "nombres","apellidos","direccion","ciudad","departamento"};
+        String columnas[] = {"user_id", "nombres","apellidos","aplicacion","rol","estado"};
         DefaultTableModel modelo = new DefaultTableModel(null, columnas); 
 
         String[] registros = new String[6];
@@ -37,9 +37,9 @@ public class Administrador extends javax.swing.JFrame {
                 registros[0] = rs.getString("user_id");
                 registros[1] = rs.getString("nombres");
                 registros[2] = rs.getString("apellidos");
-                registros[3] = rs.getString("direccion");
-                registros[4] = rs.getString("ciudad");
-                registros[5] = rs.getString("departamento");
+                registros[3] = rs.getString("PERMISOS.app_id");
+                registros[4] = rs.getString("PERMISOS.rol_neg_id");
+                registros[5] = rs.getString("PERMISOS.estado");
 
                 modelo.addRow(registros);
             }
