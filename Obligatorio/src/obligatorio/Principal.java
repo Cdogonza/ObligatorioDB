@@ -164,7 +164,7 @@ public class Principal extends javax.swing.JFrame {
         });
         getContentPane().add(btnEMP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 160, 40));
 
-        btnSalir.setBackground(new java.awt.Color(249, 2, 59));
+        btnSalir.setBackground(new java.awt.Color(249, 2, 58));
         btnSalir.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(0, 0, 0));
         btnSalir.setText("SALIR");
