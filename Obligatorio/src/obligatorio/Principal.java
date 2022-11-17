@@ -26,20 +26,20 @@ public class Principal extends javax.swing.JFrame {
      */
     public void ValidacionRol(String rol) {
 
-        if (rol.contains("ADMIN")) {
+        if (rol.contains("admin")) {
             panelEmp.setVisible(false);
             panelJefe.setVisible(false);
             panelPpal.setVisible(false);
             panelAdmin.setVisible(true);
             cargarUsers();
         }
-        if (rol.contains("JEFE")) {
+        if (rol.contains("jefe")) {
             panelAdmin.setVisible(false);
             panelPpal.setVisible(false);
             panelEmp.setVisible(false);
             panelJefe.setVisible(true);
         }
-        if (rol.contains("EMP")) {
+        if (rol.contains("encargado")) {
             panelAdmin.setVisible(false);
             panelJefe.setVisible(false);
             panelPpal.setVisible(false);
@@ -49,9 +49,9 @@ public class Principal extends javax.swing.JFrame {
     }
 
     public void cargarUsers() {
-        String sql = "SELECT * FROM user;";
+        String sql = "SELECT * FROM PERSONAS;";
 
-        String columnas[] = {"id_number", "firstName", "istatName", "rolID", "admissionDate", "Contact"};
+        String columnas[] = {"user_id", "nombres", "apellidos", "direccion", "ciudad", "departamento"};
         DefaultTableModel modelo = new DefaultTableModel(null, columnas);
 
         String[] registros = new String[6];
@@ -59,12 +59,12 @@ public class Principal extends javax.swing.JFrame {
             Statement stat = conec.createStatement();
             ResultSet rs = stat.executeQuery(sql);
             while (rs.next()) {
-                registros[0] = rs.getString("id_number");
-                registros[1] = rs.getString("firstName");
-                registros[2] = rs.getString("istatName");
-                registros[3] = rs.getString("rolID");
-                registros[4] = rs.getString("admissionDate");
-                registros[5] = rs.getString("contact");
+                registros[0] = rs.getString("user_id");
+                registros[1] = rs.getString("nombres");
+                registros[2] = rs.getString("apellidos");
+                registros[3] = rs.getString("direccion");
+                registros[4] = rs.getString("ciudad");
+                registros[5] = rs.getString("departamento");
 
                 modelo.addRow(registros);
             }
@@ -123,12 +123,14 @@ public class Principal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         panelJefe = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(831, 520));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAdmin.setBackground(new java.awt.Color(255, 255, 255));
+        btnAdmin.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         btnAdmin.setForeground(new java.awt.Color(0, 0, 0));
         btnAdmin.setText("Administrador");
         btnAdmin.setActionCommand("btnPrincipal");
@@ -141,6 +143,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(btnAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 160, 40));
 
         btnJefe.setBackground(new java.awt.Color(255, 255, 255));
+        btnJefe.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         btnJefe.setForeground(new java.awt.Color(0, 0, 0));
         btnJefe.setText("Jefatura");
         btnJefe.setActionCommand("btnPrincipal");
@@ -153,6 +156,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(btnJefe, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 160, 40));
 
         btnEMP1.setBackground(new java.awt.Color(255, 255, 255));
+        btnEMP1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         btnEMP1.setForeground(new java.awt.Color(0, 0, 0));
         btnEMP1.setText("Empleado");
         btnEMP1.setActionCommand("btnPrincipal");
@@ -162,10 +166,10 @@ public class Principal extends javax.swing.JFrame {
                 btnEMP1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEMP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 160, 40));
+        getContentPane().add(btnEMP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 160, 40));
 
-        btnSalir.setBackground(new java.awt.Color(249, 2, 58));
-        btnSalir.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 18)); // NOI18N
+        btnSalir.setBackground(new java.awt.Color(249, 2, 59));
+        btnSalir.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(0, 0, 0));
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -180,7 +184,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(lblrol, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 160, 30));
 
         lbliconuser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbliconuser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconoUser.png"))); // NOI18N
+        lbliconuser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pngfind.com-user-icon-png-938537.png"))); // NOI18N
         getContentPane().add(lbliconuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 50, 50));
 
         lblname.setForeground(new java.awt.Color(255, 255, 255));
@@ -192,12 +196,20 @@ public class Principal extends javax.swing.JFrame {
 
         panelEmp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel3.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
         jLabel3.setText("EMPLEADOS");
-        panelEmp.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 27, -1, -1));
+        panelEmp.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 7, -1, 50));
 
+        jButton2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jButton2.setText("Facturar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         panelEmp.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 160, 50));
 
+        jButton4.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jButton4.setText("Consultar Precio");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,6 +218,7 @@ public class Principal extends javax.swing.JFrame {
         });
         panelEmp.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 160, 50));
 
+        jButton3.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jButton3.setText("Modificar mis datos");
         panelEmp.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 160, 50));
 
@@ -228,32 +241,39 @@ public class Principal extends javax.swing.JFrame {
 
         panelAdmin.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 540, 140));
 
+        jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel1.setText("TABLA USUARIOS");
         panelAdmin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
         jLabel2.setText("ADMINISTRADORES");
-        panelAdmin.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, 20));
+        panelAdmin.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 0, 520, 70));
 
         getContentPane().add(panelAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 570, 470));
 
-        jLabel4.setFont(new java.awt.Font("Maiandra GD", 1, 48)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
         jLabel4.setText("BIENVENIDOS");
         panelPpal.add(jLabel4);
 
         getContentPane().add(panelPpal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 600, 470));
 
+        jLabel6.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
         jLabel6.setText("JEFATURA");
         panelJefe.add(jLabel6);
 
         getContentPane().add(panelJefe, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 600, 470));
 
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo-login-web.jpg"))); // NOI18N
+        jLabel5.setText("jLabel5");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 500));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
-        if (Loggin.rolUser.contains("EMP")||Loggin.rolUser.contains("JEFE")) {
+        if (Loggin.rolUser.contains("encargado")||Loggin.rolUser.contains("jefe")) {
             JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
-        } else if (Loggin.rolUser.contains("ADMIN")) {
+        } else if (Loggin.rolUser.contains("admin")) {
             ValidacionRol(Loggin.rolUser);
         }
 
@@ -264,26 +284,26 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnJefeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJefeActionPerformed
-        if (Loggin.rolUser.contains("EMP")) {
+        if (Loggin.rolUser.contains("encargado")) {
             JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
-        } else if (Loggin.rolUser.contains("ADMIN")) {
-            ValidacionRol("JEFE");
+        } else if (Loggin.rolUser.contains("admin")) {
+            ValidacionRol("jefe");
         } else {
 
-            ValidacionRol("JEFE");
+            ValidacionRol("jefe");
         }
 
 
     }//GEN-LAST:event_btnJefeActionPerformed
 
     private void btnEMP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEMP1ActionPerformed
-       if (Loggin.rolUser.contains("JEFE")) {
+       if (Loggin.rolUser.contains("jefe")) {
             JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
-        } else if (Loggin.rolUser.contains("ADMIN")) {
-            ValidacionRol("EMP");
+        } else if (Loggin.rolUser.contains("admin")) {
+            ValidacionRol("encargado");
         } else {
 
-            ValidacionRol("EMP");
+            ValidacionRol("encargado");
         }
     }//GEN-LAST:event_btnEMP1ActionPerformed
 
@@ -300,6 +320,10 @@ public class Principal extends javax.swing.JFrame {
         log.setVisible(true);
 
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,6 +342,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbliconuser;
