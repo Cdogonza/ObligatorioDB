@@ -9,10 +9,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,11 +23,31 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Formulario_Datos extends javax.swing.JFrame {
 
+    public String fechaActual() {
+
+        String timestamp = ZonedDateTime.now(ZoneId.of("America/Montevideo"))
+                .format(DateTimeFormatter.ofPattern("MM-dd-yyy"));
+        String fecha = timestamp;
+        return fecha;
+    }
+
     /**
      * Creates new form Formulario_Datos
      */
+    public void limpiar() {
+        ci.setText("");
+        name.setText("");
+        apellido.setText("");
+        addres.setText("");
+        ciudades.setSelectedIndex(0);
+        departamentos.setSelectedIndex(0);
+        hashpwd.setText("");
+
+    }
+
     public void ingresoFormilario() {
         try {
+
             PreparedStatement pst = conec.prepareStatement("INSERT INTO PERSONAS(user_id,nombres,apellidos,"
                     + "direccion,ciudad,departamento,hashpwd) VALUES(?,?,?,?,?,?,?)");
 
@@ -39,25 +62,41 @@ public class Formulario_Datos extends javax.swing.JFrame {
             Statement stat = conec.createStatement();
             ResultSet consulta = stat.executeQuery("SELECT obligatorioDB.PREGUNTAS.preg_id, obligatorioDB.PERSONAS.user_id "
                     + "FROM obligatorioDB.PERSONAS INNER JOIN obligatorioDB.PREGUNTAS ON preguntas='" + preguntasSeguridad.getSelectedItem().toString() + "' AND obligatorioDB.PERSONAS.user_id='" + ci.getText() + "' ");
-                PreparedStatement preg = conec.prepareStatement("INSERT INTO PERSONAS_PREGUNTAS(user_id,preg_id,respuesta) VAUES"
-                        + "?,?,?");
+            PreparedStatement preg = conec.prepareStatement("INSERT INTO PERSONAS_PREGUNTAS(user_id,preg_id,respuesta) VALUES(?,?,?)");
             if (consulta.next()) {
-     
-                preg.setString(1, consulta.getString("preg_id"));
-                preg.setString(2, consulta.getString("user_id"));
+                preg.setString(1, consulta.getString("user_id"));
+                preg.setString(2, consulta.getString("preg_id"));
                 preg.setString(3, respuestaPregunta.getText());
                 preg.executeUpdate();
 
-              
-                JOptionPane.showMessageDialog(null, "ALTA CORRECTA");
-                }
-            }catch (SQLException ex) {
+            }
+            Statement obtenerRolSeleccionado = conec.createStatement();
+            ResultSet rol = obtenerRolSeleccionado.executeQuery("SELECT obligatorioDB.ROLES_APLICATIVO.app_id FROM obligatorioDB.ROLES_APLICATIVO WHERE descripcion = '" + comboRoles.getSelectedItem().toString() + "';");
+            String rolDato = "";
+            if (rol.next()) {
+                rolDato = rol.getString("app_id");
+            }
+            String rolCom = comboRoles.getSelectedItem().toString();
+            PreparedStatement permiso = conec.prepareStatement("INSERT INTO obligatorioDB.PERMISOS (user_id,app_id,rol_neg_id,"
+                    + "fecha_solicitud,fecha_autorizacion,estado) VALUES(?,?,?,?,?,?)");
+            permiso.setString(1, ci.getText());
+            permiso.setString(2, rolDato);
+            permiso.setString(3, rolCom);
+            permiso.setString(4, fechaActual());
+            permiso.setString(5, "sinAutorizar");
+            permiso.setString(6, "pendiente");
+            permiso.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "ALTA CORRECTA");
+            limpiar();
+            this.dispose();
+            Loggin login = new Loggin();
+            login.setVisible(true);
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Datos Erroneos Reintene", "", JOptionPane.ERROR_MESSAGE);
             System.out.println(ex);
         }
-        }
-
-    
+    }
 
     public void cargarPreguntas() {
         String sql = "SELECT * FROM PREGUNTAS ";
@@ -95,6 +134,7 @@ public class Formulario_Datos extends javax.swing.JFrame {
         initComponents();
         cargarPreguntas();
         cargarRoles();
+        System.out.println(fechaActual());
     }
 
     /**
