@@ -5,6 +5,7 @@
 package obligatorio;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -149,6 +150,7 @@ public final class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         panelPpal = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         lblPend = new javax.swing.JLabel();
@@ -263,6 +265,14 @@ public final class Principal extends javax.swing.JFrame {
         });
         panelAdmin.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 190, 50));
 
+        btnEliminar.setText("Eliminar Usuario");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        panelAdmin.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 140, 50));
+
         getContentPane().add(panelAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 570, 470));
 
         panelPpal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -286,7 +296,7 @@ public final class Principal extends javax.swing.JFrame {
         jLabel6.setText("JEFATURA");
         panelJefe.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 100));
 
-        getContentPane().add(panelJefe, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 600, 470));
+        getContentPane().add(panelJefe, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 580, 470));
 
         panelEmp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -378,6 +388,31 @@ public final class Principal extends javax.swing.JFrame {
         ventanaAdmin.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+       
+        String user = String.valueOf(tblUser.getValueAt(tblUser.getSelectedRow(), 0));
+           System.out.println(user);            try{
+               
+           String sql = "DELETE FROM `obligatorioDB`.`PERSONAS` WHERE (`user_id` = '"+user+"')";
+               PreparedStatement pst = conec.prepareStatement(sql);
+               int respuesta = JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar al usuario seleccionado?","ELIMINACION EN CURSO", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE);
+               if(respuesta==0){
+                  pst.executeUpdate();
+                  JOptionPane.showMessageDialog(null, "Eliminacion Correcta");
+                  cargarUsers();
+               }else{
+                   JOptionPane.showMessageDialog(null, "Eliminacion Cancelada");
+               }     
+               
+           } catch (SQLException ex) {
+             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+         }
+
+      
+                  
+       
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -386,6 +421,7 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel backround;
     private javax.swing.JButton btnAdmin;
     private javax.swing.JButton btnEMP1;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnJefe;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton jButton1;
