@@ -106,12 +106,6 @@ public class RecuperacionPassword extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "RESPUESTA INCORRECTA", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
-
-//          ResultSet pregunta = obtenerRolSeleccionado.executeQuery("SELECT obligatorioDB.PREGUNTAS.preguntas FROM "
-//                + "obligatorioDB.PREGUNTAS WHERE preg_id = '" + numPreg + "';");
-//          if(pregunta.next()){
-//              this.pregunta.setText(pregunta.getString("preguntas"));
-//          }
             }
 
         } catch (SQLException ex) {

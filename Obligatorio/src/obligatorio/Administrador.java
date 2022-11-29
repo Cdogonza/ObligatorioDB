@@ -76,9 +76,7 @@ public class Administrador extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(772, 401));
         setMinimumSize(new java.awt.Dimension(772, 401));
-        setPreferredSize(new java.awt.Dimension(772, 401));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -97,6 +95,7 @@ public class Administrador extends javax.swing.JFrame {
                 "id_number", "Nombre", "Apellido", "Rol", "Fecha_Ingreso", "Contacto"
             }
         ));
+        tblUser.setRowHeight(23);
         jScrollPane1.setViewportView(tblUser);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 660, 140));
@@ -111,7 +110,7 @@ public class Administrador extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 180, 40));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 180, 40));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo-login-web.jpg"))); // NOI18N
         jLabel3.setText("jLabel3");
@@ -126,8 +125,8 @@ public String fechaActual() {
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String user = String.valueOf(tblUser.getValueAt(tblUser.getSelectedRow(), 0));
-        
-        String sql = "UPDATE `obligatorioDB`.`PERMISOS` SET `estado` = 'Aprobado', fecha_autorizacion = '"+fechaActual()+"' WHERE (`user_id` ="
+
+        String sql = "UPDATE `obligatorioDB`.`PERMISOS` SET `estado` = 'Aprobado', fecha_autorizacion = '" + fechaActual() + "' WHERE (`user_id` ="
                 + " '" + user + "')";
         try {
             PreparedStatement pst = conec.prepareStatement(sql);
@@ -137,7 +136,7 @@ public String fechaActual() {
         } catch (SQLException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
     /**
      * @param args the command line arguments
