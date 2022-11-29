@@ -28,10 +28,10 @@ private Connection conec;
 
             final String Controlador = "com.mysql.cj.jdbc.Driver";
             Class.forName(Controlador);
-            final String url_bd = "jdbc:mysql://localhost:3306/obligatorioBD?useUnicode=true&use"
+            final String url_bd = "jdbc:mysql://localhost:3306/obligatorioDB?useUnicode=true&use"
                     + "JDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&"
                     + "serverTimezone=UTC";
-            conec = DriverManager.getConnection(url_bd, "root", "1234");
+            conec = DriverManager.getConnection(url_bd, "gonzalo", "admin");
 
             sentencia = conec.createStatement();
             conectado = true;

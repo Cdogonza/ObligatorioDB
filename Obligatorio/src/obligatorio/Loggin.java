@@ -4,10 +4,6 @@
  */
 package obligatorio;
 
-import com.mysql.cj.conf.PropertyKey;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Image;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -16,9 +12,6 @@ import java.sql.Statement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -63,9 +56,9 @@ public class Loggin extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(548, 338));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUserActionPerformed(evt);
+        txtUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUserMouseClicked(evt);
             }
         });
         getContentPane().add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 220, 40));
@@ -82,17 +75,9 @@ public class Loggin extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 255));
         jLabel1.setText("Crear Usuario Nuevo");
-        jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jLabel1MouseDragged(evt);
-            }
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel1MouseMoved(evt);
-            }
-        });
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel1MouseExited(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
             }
         });
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, -1, -1));
@@ -104,12 +89,6 @@ public class Loggin extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel3.setText("Usuario:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
-
-        txtPass.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtPassMouseClicked(evt);
-            }
-        });
         getContentPane().add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 220, 40));
 
         jLabel4.setFont(new java.awt.Font("Calibri Light", 0, 36)); // NOI18N
@@ -128,83 +107,6 @@ public class Loggin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnlogginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlogginActionPerformed
-        if (txtUser.getText().isEmpty() || txtPass.getText().isEmpty()) {
-            System.out.println("DEBE INGRESAR USUARIO Y PASSWORD");
-        } else {
-            String user = txtUser.getText().toUpperCase();
-            String pass = hashPwd(txtPass.getText());
-            try {
-                Statement stat = conec.createStatement();
-                ResultSet consulta = stat.executeQuery("select * from PERSONAS join PERMISOS on PERSONAS.user_id=PERMISOS.user_id where PERSONAS.user_id='" + user + "'");
-                if (consulta.next()) {
-                    do {
-                        String pas = consulta.getString("hashpwd");
-                        if (pass.equals(pas)) {
-                            this.user = consulta.getString("nombres") + " " + consulta.getString("apellidos");
-                            this.rolUser = consulta.getString("rol_neg_id");                            
-                            this.dispose();
-                            Principal ppal = new Principal();
-                            ppal.setVisible(true);
-                            
-                        } else {
-                            JOptionPane.showMessageDialog(null, "ERROR", "LOS DATOS INGRESADOS NO SON CORRECTOS", JOptionPane.ERROR_MESSAGE);
-                        }
-
-                    } while (consulta.next());
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "USUARIO NO EXISTE", "ERROR", JOptionPane.ERROR_MESSAGE);
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(Loggin.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-
-    }//GEN-LAST:event_btnlogginActionPerformed
-
-    private void jLabel1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseMoved
-     
-        jLabel1.setBackground(Color.LIGHT_GRAY);
-    }//GEN-LAST:event_jLabel1MouseMoved
-
-    private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
-        jLabel1.setBackground(Color.BLUE);
-    }//GEN-LAST:event_jLabel1MouseDragged
-
-    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
-        jLabel1.setBackground(Color.LIGHT_GRAY);
-    }//GEN-LAST:event_jLabel1MouseExited
-
-    private void txtPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPassMouseClicked
-               // TODO add your handling code here:
-    }//GEN-LAST:event_txtPassMouseClicked
-    
-    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUserActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnloggin;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPasswordField txtPass;
-    private javax.swing.JTextField txtUser;
-    // End of variables declaration//GEN-END:variables
-    Conexion_MySql conexion = new Conexion_MySql();
-    Connection conec = conexion.ConectarBasedeDatos();
-    
     private String hashPwd(String pass){
         String passwordToHash = pass;
         String generatedPassword = null;
@@ -234,5 +136,70 @@ public class Loggin extends javax.swing.JFrame {
         }
         return generatedPassword;
     }
-    
+    private void btnlogginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlogginActionPerformed
+        if (txtUser.getText().isEmpty() || txtPass.getText().isEmpty()) {
+            System.out.println("DEBE INGRESAR USUARIO Y PASSWORD");
+        } else {
+            String user = txtUser.getText().toUpperCase();
+            String pass = hashPwd(txtPass.getText());
+            try {
+                Statement stat = conec.createStatement();
+                ResultSet consulta = stat.executeQuery("select * from PERSONAS join PERMISOS on PERSONAS.user_id=PERMISOS.user_id where PERSONAS.user_id='" + user + "'");
+                if (consulta.next()) {
+                    do {
+                        String pas = consulta.getString("hashpwd");
+                        if (pass.equals(pas)) {
+                            this.user = consulta.getString("nombres") + " " + consulta.getString("apellidos");
+                            this.rolUser = consulta.getString("rol_neg_id");                            
+                            this.dispose();
+                            Principal ppal = new Principal();
+                            ppal.setVisible(true);
+                            
+                        } else {
+                            JOptionPane.showMessageDialog(null,  "LOS DATOS INGRESADOS NO SON CORRECTOS","ERROR", JOptionPane.ERROR_MESSAGE);
+                            System.out.println(pas);
+                            System.out.println(pass);
+                        }
+
+                    } while (consulta.next());
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "USUARIO NO EXISTE", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Loggin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+
+    }//GEN-LAST:event_btnlogginActionPerformed
+
+    private void txtUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserMouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+       this.dispose();
+        Formulario_Datos alta = new Formulario_Datos();
+       alta.setVisible(true);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    /**
+     * @param args the command line arguments
+     */
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnloggin;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPasswordField txtPass;
+    private javax.swing.JTextField txtUser;
+    // End of variables declaration//GEN-END:variables
+    Conexion_MySql conexion = new Conexion_MySql();
+    Connection conec = conexion.ConectarBasedeDatos();
 }
