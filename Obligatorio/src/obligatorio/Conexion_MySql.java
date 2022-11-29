@@ -30,7 +30,7 @@ public class Conexion_MySql {
             final String url_bd = "jdbc:mysql://localhost:3306/obligatorioDB?useUnicode=true&use"
                     + "JDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&"
                     + "serverTimezone=UTC";
-            conec = DriverManager.getConnection(url_bd, "gonzalo", "admin");
+            conec = DriverManager.getConnection(url_bd, "root", "admin");
 
             sentencia = conec.createStatement();
             conectado = true;

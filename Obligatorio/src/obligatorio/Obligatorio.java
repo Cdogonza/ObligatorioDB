@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author gpaz1
@@ -31,9 +32,5 @@ public class Obligatorio {
             JOptionPane.showMessageDialog(null,"Ha surgido un error de conexion a la base de datos, contacte con el Administrador","Error de Conexion",JOptionPane.ERROR_MESSAGE);
          
         }
-        
-
-
- 
     }
 }
