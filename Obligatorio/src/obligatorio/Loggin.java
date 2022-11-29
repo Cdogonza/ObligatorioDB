@@ -107,7 +107,7 @@ public class Loggin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private String hashPwd(String pass){
+    public static String hashPwd(String pass){
         String passwordToHash = pass;
         String generatedPassword = null;
 

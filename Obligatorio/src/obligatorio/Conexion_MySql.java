@@ -17,11 +17,10 @@ import javax.swing.JOptionPane;
 
 public class Conexion_MySql {
 
-
     public Statement sentencia;
     public ResultSet resultado;
-public boolean conectado=false;
-private Connection conec;
+    public boolean conectado = false;
+    private Connection conec;
 
     public Connection ConectarBasedeDatos() {
         try {
@@ -35,7 +34,7 @@ private Connection conec;
 
             sentencia = conec.createStatement();
             conectado = true;
-            
+
         } catch (ClassNotFoundException | SQLException ex) {
             //   JOptionPane.showMessageDialog(null, ex.getMessage(), "Error ", JOptionPane.ERROR_MESSAGE);
             System.out.println(ex.getMessage());
