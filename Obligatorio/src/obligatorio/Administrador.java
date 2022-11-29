@@ -27,6 +27,7 @@ public class Administrador extends javax.swing.JFrame {
     /**
      * Creates new form Adminstrador
      */
+    public  String app_id ="";
     public void cargarUsers() {
         String sql = "SELECT * FROM obligatorioDB.PERMISOS WHERE estado = 'pendiente';";
 
@@ -73,6 +74,7 @@ public class Administrador extends javax.swing.JFrame {
         tblUser = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -110,7 +112,15 @@ public class Administrador extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 180, 40));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 180, 40));
+
+        jButton2.setText("Modificar Rol");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, 170, 40));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo-login-web.jpg"))); // NOI18N
         jLabel3.setText("jLabel3");
@@ -138,12 +148,51 @@ public String fechaActual() {
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        String user = String.valueOf(tblUser.getValueAt(tblUser.getSelectedRow(), 0));
+        Object seleccion = JOptionPane.showInputDialog(null,
+                "Seleccione rol",
+                "Selector de Roles",
+                JOptionPane.QUESTION_MESSAGE,
+                null, // null para icono defecto
+                new Object[]{"Administrador","encargado", "jefe", "empleado"}, "Administrador");
+               
+                if(seleccion.toString().contains("administrador")){
+                    app_id="adm_app";
+                    
+                }
+                if(seleccion.toString().contains("encargado")){
+                    app_id="enc_app";
+                    
+                }
+                if(seleccion.toString().contains("jefe")){
+                    app_id="jef_app";
+                   
+                }
+                if(seleccion.toString().contains("empleado")){
+                    app_id="emp_app";
+                    
+                }
+        String sql = "UPDATE `obligatorioDB`.`PERMISOS` SET `rol_neg_id`='" + seleccion + "', app_id='"+app_id+"', `estado` = 'Aprobado', fecha_autorizacion = '" + fechaActual() + "' WHERE (`user_id` ="
+                + " '" + user + "')";
+        try {
+            PreparedStatement pst = conec.prepareStatement(sql);
+            pst.executeUpdate();
+
+            cargarUsers();
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
