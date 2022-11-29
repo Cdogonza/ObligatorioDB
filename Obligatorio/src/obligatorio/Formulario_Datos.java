@@ -4,6 +4,15 @@
  */
 package obligatorio;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author gpaz1
@@ -13,8 +22,42 @@ public class Formulario_Datos extends javax.swing.JFrame {
     /**
      * Creates new form Formulario_Datos
      */
+    public void cargarPreguntas() {
+        String sql = "SELECT * FROM PREGUNTAS ";
+
+        try {
+            Statement stat = conec.createStatement();
+            ResultSet rs = stat.executeQuery(sql);
+            while (rs.next()) {
+                preguntasSeguridad.addItem(rs.getString("pregunta"));
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Loggin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void cargarRoles() {
+        String sql = "SELECT * FROM ROLES_APLICATIVOS ";
+
+        try {
+            Statement stat = conec.createStatement();
+            ResultSet rs = stat.executeQuery(sql);
+            while (rs.next()) {
+                comboRoles.addItem(rs.getString("descripcion_rol"));
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Loggin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public Formulario_Datos() {
         initComponents();
+        cargarPreguntas();
+        cargarRoles();
     }
 
     /**
@@ -42,8 +85,15 @@ public class Formulario_Datos extends javax.swing.JFrame {
         ciudades = new javax.swing.JComboBox<>();
         departamentos = new javax.swing.JComboBox<>();
         jPasswordField1 = new javax.swing.JPasswordField();
+        preguntasSeguridad = new javax.swing.JComboBox<>();
+        respuestaPregunta = new javax.swing.JTextField();
+        comboRoles = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(465, 711));
+        setMinimumSize(new java.awt.Dimension(465, 711));
+        setPreferredSize(new java.awt.Dimension(465, 711));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("FORMULARIO DE DATOS PERSONALES");
@@ -72,24 +122,37 @@ public class Formulario_Datos extends javax.swing.JFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
 
         jLabel6.setText("CONTRASEÑA");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
 
         jButton1.setText("ENVIAR DATOS");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 70, 40));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 600, 310, 60));
 
-        jLabel7.setText("CIUDAD");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+        jLabel7.setText("ROL");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, -1));
 
         jLabel8.setText("DEPARTAMENTO");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
 
-        ciudades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Ciudad", "Montevideo", "Salto", "Ciudad de la Costa", "Paysandú", "Las Piedras", "Rivera", "Maldonado", "Tacuarembó", "Melo", "Mercedes", "Artigas", "Minas", "San José de Mayo", "Durazno", "Florida", "Barros Blancos", "Ciudad del Plata", "San carlos", "Colonia del Sacramento", "Pando", "Treinta y Tres", "Rocha", "Fray Bentos", "Trinidad", "La paz", "Canelones", "Carmelo", "Dolores", "Joven", "Santa Lucía", "Progreso", "Paso de Carrasco", "Río Branco", "Paso de los Toros", "Juan Lacaze", "Bella Unión", "Nueva Helvecia", "Libertad", "Rosario", "Nueva Palmira", "Chuy", "Punta del Este", "Piriápolis", "Salinas", "Parque del Plata", "Lascano", "Castillos", "Tranqueras", "Sarandí del Yí", "San Ramón", "Tarariras", "Pan De Azúcar", "Salsa", "Sarandí Grande", "Atlántida", "José Pedro Varela", "Tala", "Guichón", "Cardona", "San Jacinto", "Toledo", "Vergara", "Santa Rosa", "Florencio Sánchez", "La Paloma", "San Gregorio de Polanco", "Ombúes de Lavalle", "Colonia Valdense", "Cerrillos", "Aiguá", "Migues", "San Bautista" }));
-        getContentPane().add(ciudades, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 200, 30));
+        ciudades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Ciudad", "Artigas", "Bella Unión", "Baltasar Brum", "Bernabé Rivera", "Colonia Palma", "Montes Quintela", "Paso Campamento", "Sequeira", "Tomás Gomensoro", "Atlántida", "Barra de Carrasco", "Canelones", "Ciudad de la Costa", "Colonia Nicolich", "La Paz", "Las Piedras", "Pando", "Paso Carrasco", "Santa Lucía", "Aceguá", "Fraile Muerto", "Isidoro Noblía", "Lago Merín", "Melo", "Plácido Rosas", "Río Branco", "Tupambaé", "Carmelo", "Colonia de Sacramento", "Juan Lacaze", "Nueva Helvecia", "Nueva Palmira", "Rosario", "Tarariras", "Durazno", "Sarandí del Yí", "Villa del Carmen", "Andresito", "Área Rural", "Ismael Cortinas", "La Casilla", "Trinidad", "25 de Agosto", "25 de Mayo", "Cardal", "Casupá", "Cerro Colorado", "Florida", "Fray Marcos", "Nico Pérez", "Sarandí Grande", "Colón", "Illescas", "José Batlle y Ordóñez", "José Pedro Varela", "Mariscala", "Minas", "Pirarajá", "Solís de Mataojo", "Zapicán", "Aiguá", "Cerro Pelado", "Gregorio Aznárez", "Hipódromo", "José Ignacio", "La Barra", "Maldonado", "Pan de Azúcar", "Pinares-Las Delicias", "Piriápolis", "Portezuelo", "Punta del Este", "San Carlos", "San Rafael-El placer", "Abayubá", "Montevideo", "Montevideo Rural", "Pajas Blancas", "Santiago Vázquez", "Barrio Norte", "Guichón", "Nuevo Paysandú", "Paysandú", "Porvenir", "Piedras Coloradas", "Quebracho", "Sam Félix", "Tambores", "Algorta", "Bellaco", "Colonia Ofir", "El Ombú", "Gartenal", "Grecco", "General Borges", "Fray Bentos", "Los Arrayanes", "Las Cañas", "Menafra", "Nuevo Berlín", "Paso de los Mellizos", "San Javier", "Sarandí de Navarro", "Villa María", "YoungLa Pedrera", "Masoller", "Minas de Corrales", "Rivera", "Santa Teresa", "Tranqueras", "Vichadero", "Chuy", "Castillos", "Lascano", "La Paloma", "Albisu", "Belén", "Biassini", "Colonia 18 de Julio", "Colonia Itapebí", "Constitución", "Fernández", "Garibaldi", "Pueblo Lavalleja", "Rincón de Valentín", "Salto", "San Antonio", "Saucedo", "Sarandí del Arapey", "Termas del Daymán", "Ciudad de Plata", "Ecilda Paullier", "Libertad", "Puntas de Valdez", "Rafael Perazza", "Rodríguez", "San José de Mayo", "Cardona", "Chacras de Dolores", "Dolores", "José Enrique Rodó", "La Pedrera", "Mercedes", "Palmitas", "Villa Soriano", "Achar", "Balneario Iporá", "Cuchilla de Peralta", "Curtina", "Cuchilla del Ombú", "Clara", "Chamberlain", "Cardozo", "Las Toscas", "Laureles", "Paso de toros", "Paso Bonilla", "Paso del Cerro", "Piedra Sola", "Punta de Cinco Sauces", "Pueblo de Barro", "Rincón del Bonete", "Sauce de Batoví", "San Gregorio de Polanco", "Tacuarembó", "Tambores", "Villa Ansina", "Cerro Chato", "Ejido de Treinta y Tres", "General Enrique Martínez", "Santa Clara de Olimar", "Treinta y Tres", "Vergara", "Villa Sara" }));
+        ciudades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ciudadesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ciudades, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 200, 30));
 
         departamentos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " Seleccione Departamento", "Artigas", " Canelones", " Cerro Largo", " Colonia", " Durazno", " Flores", " Florida", " Lavalleja", " Maldonado", " Montevido", " Paysandú", " Río Negro", " Rivera", " Rocha", " Salto", " San José", " Soriano", " Tacuarembo", " Treinta y Tres" }));
         departamentos.setToolTipText("");
-        getContentPane().add(departamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 200, 30));
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 200, 30));
+        getContentPane().add(departamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 200, 30));
+        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, 200, 30));
+
+        getContentPane().add(preguntasSeguridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 490, 330, 30));
+        getContentPane().add(respuestaPregunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 540, 210, 30));
+
+        getContentPane().add(comboRoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 200, 30));
+
+        jLabel9.setText("CIUDAD");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -98,13 +161,17 @@ public class Formulario_Datos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void ciudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciudadesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ciudadesActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ciudades;
+    private javax.swing.JComboBox<String> comboRoles;
     private javax.swing.JComboBox<String> departamentos;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -115,10 +182,15 @@ public class Formulario_Datos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JComboBox<String> preguntasSeguridad;
+    private javax.swing.JTextField respuestaPregunta;
     // End of variables declaration//GEN-END:variables
+Conexion_MySql conexion = new Conexion_MySql();
+    Connection conec = conexion.ConectarBasedeDatos();
 }

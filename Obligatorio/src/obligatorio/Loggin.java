@@ -107,7 +107,35 @@ public class Loggin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private String hashPwd(String pass){
+        String passwordToHash = pass;
+        String generatedPassword = null;
 
+        try 
+        {
+          // Create MessageDigest instance for MD5
+          MessageDigest md = MessageDigest.getInstance("MD5");
+
+          // Add password bytes to digest
+          md.update(passwordToHash.getBytes());
+
+          // Get the hash's bytes
+          byte[] bytes = md.digest();
+
+          // This bytes[] has bytes in decimal format. Convert it to hexadecimal format
+          StringBuilder sb = new StringBuilder();
+          for (int i = 0; i < bytes.length; i++) {
+            sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+          }
+
+          // Get complete hashed password in hex format
+          generatedPassword = sb.toString();
+          return generatedPassword;
+        } catch (NoSuchAlgorithmException e) {
+          e.printStackTrace();
+        }
+        return generatedPassword;
+    }
     private void btnlogginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlogginActionPerformed
         if (txtUser.getText().isEmpty() || txtPass.getText().isEmpty()) {
             System.out.println("DEBE INGRESAR USUARIO Y PASSWORD");
@@ -174,35 +202,4 @@ public class Loggin extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     Conexion_MySql conexion = new Conexion_MySql();
     Connection conec = conexion.ConectarBasedeDatos();
-    
-    private String hashPwd(String pass){
-        String passwordToHash = pass;
-        String generatedPassword = null;
-
-        try 
-        {
-          // Create MessageDigest instance for MD5
-          MessageDigest md = MessageDigest.getInstance("MD5");
-
-          // Add password bytes to digest
-          md.update(passwordToHash.getBytes());
-
-          // Get the hash's bytes
-          byte[] bytes = md.digest();
-
-          // This bytes[] has bytes in decimal format. Convert it to hexadecimal format
-          StringBuilder sb = new StringBuilder();
-          for (int i = 0; i < bytes.length; i++) {
-            sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-          }
-
-          // Get complete hashed password in hex format
-          generatedPassword = sb.toString();
-          return generatedPassword;
-        } catch (NoSuchAlgorithmException e) {
-          e.printStackTrace();
-        }
-        return generatedPassword;
-    }
-    
 }
