@@ -48,7 +48,7 @@ public class Principal extends javax.swing.JFrame {
             panelEmp.setVisible(false);
             panelEnca.setVisible(true);
         }
-         if (rol.contains("empleado")) {
+        if (rol.contains("empleado")) {
             panelAdmin.setVisible(false);
             panelJefe.setVisible(false);
             panelPpal.setVisible(false);
@@ -126,15 +126,15 @@ public class Principal extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         panelEmp = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnEmpFact = new javax.swing.JButton();
+        btnEmpConPre = new javax.swing.JButton();
+        btnEmpConStk = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         panelEnca = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnEncConsStk = new javax.swing.JButton();
+        btnEncConsPre = new javax.swing.JButton();
+        btnEncRArq = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         panelAdmin = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -249,27 +249,32 @@ public class Principal extends javax.swing.JFrame {
         jLabel3.setPreferredSize(new java.awt.Dimension(201, 59));
         panelEmp.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 100));
 
-        jButton2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton2.setText("Facturar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnEmpFact.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnEmpFact.setText("Facturar");
+        btnEmpFact.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnEmpFactActionPerformed(evt);
             }
         });
-        panelEmp.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 160, 50));
+        panelEmp.add(btnEmpFact, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 160, 50));
 
-        jButton4.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton4.setText("Consultar Precio");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnEmpConPre.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnEmpConPre.setText("Consultar Precio");
+        btnEmpConPre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnEmpConPreActionPerformed(evt);
             }
         });
-        panelEmp.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 160, 50));
+        panelEmp.add(btnEmpConPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 160, 50));
 
-        jButton3.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton3.setText("Consultar Stock");
-        panelEmp.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 160, 50));
+        btnEmpConStk.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnEmpConStk.setText("Consultar Stock");
+        btnEmpConStk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmpConStkActionPerformed(evt);
+            }
+        });
+        panelEmp.add(btnEmpConStk, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 160, 50));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/856f31d9f475501c7552c97dbe727319.jpg"))); // NOI18N
         panelEmp.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 470));
@@ -291,28 +296,38 @@ public class Principal extends javax.swing.JFrame {
         jLabel7.setPreferredSize(new java.awt.Dimension(201, 59));
         panelEnca.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 100));
 
-        jButton1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton1.setText("Consultar Stock");
-        jButton1.setMaximumSize(new java.awt.Dimension(60, 26));
-        jButton1.setMinimumSize(new java.awt.Dimension(60, 26));
-        jButton1.setPreferredSize(new java.awt.Dimension(60, 26));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnEncConsStk.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnEncConsStk.setText("Consultar Stock");
+        btnEncConsStk.setMaximumSize(new java.awt.Dimension(60, 26));
+        btnEncConsStk.setMinimumSize(new java.awt.Dimension(60, 26));
+        btnEncConsStk.setPreferredSize(new java.awt.Dimension(60, 26));
+        btnEncConsStk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnEncConsStkActionPerformed(evt);
             }
         });
-        panelEnca.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 160, 50));
+        panelEnca.add(btnEncConsStk, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 160, 50));
 
-        jButton5.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton5.setText("Consultar Precio");
-        panelEnca.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 160, 50));
+        btnEncConsPre.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnEncConsPre.setText("Consultar Precio");
+        btnEncConsPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEncConsPreActionPerformed(evt);
+            }
+        });
+        panelEnca.add(btnEncConsPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 160, 50));
 
-        jButton6.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton6.setText("Realizar Arqueo");
-        jButton6.setMaximumSize(new java.awt.Dimension(122, 26));
-        jButton6.setMinimumSize(new java.awt.Dimension(122, 26));
-        jButton6.setPreferredSize(new java.awt.Dimension(122, 26));
-        panelEnca.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 160, 50));
+        btnEncRArq.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnEncRArq.setText("Realizar Arqueo");
+        btnEncRArq.setMaximumSize(new java.awt.Dimension(122, 26));
+        btnEncRArq.setMinimumSize(new java.awt.Dimension(122, 26));
+        btnEncRArq.setPreferredSize(new java.awt.Dimension(122, 26));
+        btnEncRArq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEncRArqActionPerformed(evt);
+            }
+        });
+        panelEnca.add(btnEncRArq, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 160, 50));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/856f31d9f475501c7552c97dbe727319.jpg"))); // NOI18N
         panelEnca.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 470));
@@ -373,7 +388,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
-        if (Loggin.rolUser.contains("encargado")||Loggin.rolUser.contains("jefe")||Loggin.rolUser.contains("empleado")) {
+        if (Loggin.rolUser.contains("encargado") || Loggin.rolUser.contains("jefe") || Loggin.rolUser.contains("empleado")) {
             JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else if (Loggin.rolUser.contains("admin")) {
             ValidacionRol(Loggin.rolUser);
@@ -381,12 +396,18 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAdminActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnEmpConPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpConPreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        if (Loggin.rolUser.contains("admin")) {
+            JOptionPane.showMessageDialog(null, "Usted verá está funcion desde el modo Administrador", "Administrador Consulta Precio", JOptionPane.WARNING_MESSAGE);
+        }else{
+               JOptionPane.showMessageDialog(null, "Usted a selaccionado la opción Consultar Precio", "Login Correcto", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btnEmpConPreActionPerformed
 
     private void btnJefeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJefeActionPerformed
-        if (Loggin.rolUser.contains("encargado")||Loggin.rolUser.contains("empleado")) {
+        if (Loggin.rolUser.contains("encargado") || Loggin.rolUser.contains("empleado")) {
             JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else if (Loggin.rolUser.contains("admin")) {
             ValidacionRol("jefe");
@@ -399,7 +420,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnJefeActionPerformed
 
     private void btnEMP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEMP1ActionPerformed
-       if (Loggin.rolUser.contains("jefe")||Loggin.rolUser.contains("encargado")) {
+        if (Loggin.rolUser.contains("jefe") || Loggin.rolUser.contains("encargado")) {
             JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else if (Loggin.rolUser.contains("admin")) {
             ValidacionRol("empleado");
@@ -417,18 +438,23 @@ public class Principal extends javax.swing.JFrame {
         panelJefe.setVisible(false);
         conexion.DesconectarBasedeDatos();
         this.dispose();
-       
+
         Loggin log = new Loggin();
         log.setVisible(true);
 
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnEmpFactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpFactActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
+        if (Loggin.rolUser.contains("admin")) {
+            JOptionPane.showMessageDialog(null, "Usted verá está funcion desde el modo Administrador", "Administrador Facturar", JOptionPane.WARNING_MESSAGE);
+        }else{
+               JOptionPane.showMessageDialog(null, "Usted a selaccionado la opción facturar", "Login Correcto", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEmpFactActionPerformed
+    
     private void btnEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncargadoActionPerformed
-        if (Loggin.rolUser.contains("jefe")||Loggin.rolUser.contains("empleado")) {
+        if (Loggin.rolUser.contains("jefe") || Loggin.rolUser.contains("empleado")) {
             JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else if (Loggin.rolUser.contains("admin")) {
             ValidacionRol("encargado");
@@ -438,9 +464,42 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEncargadoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnEncConsStkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncConsStkActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (Loggin.rolUser.contains("admin")) {
+            JOptionPane.showMessageDialog(null, "Usted verá está funcion desde el modo Administrador", "Administrador Consulta Stock", JOptionPane.WARNING_MESSAGE);
+        }else{
+               JOptionPane.showMessageDialog(null, "Usted a selaccionado la opción Consultar Stock", "Login Correcto", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEncConsStkActionPerformed
+
+    private void btnEmpConStkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpConStkActionPerformed
+        // TODO add your handling code here:
+         if (Loggin.rolUser.contains("admin")) {
+            JOptionPane.showMessageDialog(null, "Usted verá está funcion desde el modo Administrador", "Administrador Consulta Stock", JOptionPane.WARNING_MESSAGE);
+        }else{
+               JOptionPane.showMessageDialog(null, "Usted a selaccionado la opción Consultar Stock", "Login Correcto", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btnEmpConStkActionPerformed
+
+    private void btnEncConsPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncConsPreActionPerformed
+        // TODO add your handling code here:
+         if (Loggin.rolUser.contains("admin")) {
+            JOptionPane.showMessageDialog(null, "Usted verá está funcion desde el modo Administrador", "Administrador Consulta Precio", JOptionPane.WARNING_MESSAGE);
+        }else{
+               JOptionPane.showMessageDialog(null, "Usted a selaccionado la opción Consultar Precio", "Login Correcto", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEncConsPreActionPerformed
+
+    private void btnEncRArqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncRArqActionPerformed
+        // TODO add your handling code here:
+         if (Loggin.rolUser.contains("admin")) {
+            JOptionPane.showMessageDialog(null, "Usted verá está funcion desde el modo Administrador", "Administrador Realizar Arqueo", JOptionPane.WARNING_MESSAGE);
+        }else{
+               JOptionPane.showMessageDialog(null, "Usted a selaccionado la opción Realizar Arqueo", "Login Correcto", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEncRArqActionPerformed
 
     /**
      * @param args the command line arguments
@@ -450,15 +509,15 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel backround;
     private javax.swing.JButton btnAdmin;
     private javax.swing.JButton btnEMP1;
+    private javax.swing.JButton btnEmpConPre;
+    private javax.swing.JButton btnEmpConStk;
+    private javax.swing.JButton btnEmpFact;
+    private javax.swing.JButton btnEncConsPre;
+    private javax.swing.JButton btnEncConsStk;
+    private javax.swing.JButton btnEncRArq;
     private javax.swing.JButton btnEncargado;
     private javax.swing.JButton btnJefe;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
