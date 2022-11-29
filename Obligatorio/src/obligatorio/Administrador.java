@@ -7,9 +7,13 @@ package obligatorio;
 import java.sql.Connection;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -24,10 +28,10 @@ public class Administrador extends javax.swing.JFrame {
      * Creates new form Adminstrador
      */
     public void cargarUsers() {
-        String sql = "SELECT * FROM PERSONAS join PERMISOS on PERSONAS.user_id=PERMISOS.user_id;";
+        String sql = "SELECT * FROM obligatorioDB.PERMISOS WHERE estado = 'pendiente';";
 
-        String columnas[] = {"user_id", "nombres","apellidos","aplicacion","rol","estado"};
-        DefaultTableModel modelo = new DefaultTableModel(null, columnas); 
+        String columnas[] = {"user_id", "app_id", "rol_neg_id", "fecha_solicitud", "fecha_autorizacion", "estado"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
 
         String[] registros = new String[6];
         try {
@@ -35,11 +39,11 @@ public class Administrador extends javax.swing.JFrame {
             ResultSet rs = stat.executeQuery(sql);
             while (rs.next()) {
                 registros[0] = rs.getString("user_id");
-                registros[1] = rs.getString("nombres");
-                registros[2] = rs.getString("apellidos");
-                registros[3] = rs.getString("PERMISOS.app_id");
-                registros[4] = rs.getString("PERMISOS.rol_neg_id");
-                registros[5] = rs.getString("PERMISOS.estado");
+                registros[1] = rs.getString("app_id");
+                registros[2] = rs.getString("rol_neg_id");
+                registros[3] = rs.getString("fecha_solicitud");
+                registros[4] = rs.getString("fecha_autorizacion");
+                registros[5] = rs.getString("estado");
 
                 modelo.addRow(registros);
             }
@@ -68,9 +72,13 @@ public class Administrador extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUser = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
-        setMinimumSize(new java.awt.Dimension(400, 300));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(772, 401));
+        setMinimumSize(new java.awt.Dimension(772, 401));
+        setPreferredSize(new java.awt.Dimension(772, 401));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -97,15 +105,46 @@ public class Administrador extends javax.swing.JFrame {
         jLabel2.setText("Administradores");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
 
+        jButton1.setText("AUTORIZAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 180, 40));
+
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo-login-web.jpg"))); // NOI18N
         jLabel3.setText("jLabel3");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 400));
     }// </editor-fold>//GEN-END:initComponents
+public String fechaActual() {
+
+        String timestamp = ZonedDateTime.now(ZoneId.of("America/Montevideo"))
+                .format(DateTimeFormatter.ofPattern("MM-dd-yyy"));
+        String fecha = timestamp;
+        return fecha;
+    }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String user = String.valueOf(tblUser.getValueAt(tblUser.getSelectedRow(), 0));
+        
+        String sql = "UPDATE `obligatorioDB`.`PERMISOS` SET `estado` = 'Aprobado', fecha_autorizacion = '"+fechaActual()+"' WHERE (`user_id` ="
+                + " '" + user + "')";
+        try {
+            PreparedStatement pst = conec.prepareStatement(sql);
+            pst.executeUpdate();
+
+            cargarUsers();
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

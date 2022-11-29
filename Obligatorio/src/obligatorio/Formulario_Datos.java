@@ -5,13 +5,17 @@
 package obligatorio;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,9 +23,81 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Formulario_Datos extends javax.swing.JFrame {
 
+    public String fechaActual() {
+
+        String timestamp = ZonedDateTime.now(ZoneId.of("America/Montevideo"))
+                .format(DateTimeFormatter.ofPattern("MM-dd-yyy"));
+        String fecha = timestamp;
+        return fecha;
+    }
+
     /**
      * Creates new form Formulario_Datos
      */
+    public void limpiar() {
+        ci.setText("");
+        name.setText("");
+        apellido.setText("");
+        addres.setText("");
+        ciudades.setSelectedIndex(0);
+        departamentos.setSelectedIndex(0);
+        hashpwd.setText("");
+
+    }
+
+    public void ingresoFormilario() {
+        try {
+
+            PreparedStatement pst = conec.prepareStatement("INSERT INTO PERSONAS(user_id,nombres,apellidos,"
+                    + "direccion,ciudad,departamento,hashpwd) VALUES(?,?,?,?,?,?,?)");
+
+            pst.setString(1, ci.getText());
+            pst.setString(2, name.getText());
+            pst.setString(3, apellido.getText());
+            pst.setString(4, addres.getText());
+            pst.setString(5, departamentos.getSelectedItem().toString());
+            pst.setString(6, ciudades.getSelectedItem().toString());
+            pst.setString(7, Loggin.hashPwd(hashpwd.getText()));
+            pst.executeUpdate();
+            Statement stat = conec.createStatement();
+            ResultSet consulta = stat.executeQuery("SELECT obligatorioDB.PREGUNTAS.preg_id, obligatorioDB.PERSONAS.user_id "
+                    + "FROM obligatorioDB.PERSONAS INNER JOIN obligatorioDB.PREGUNTAS ON preguntas='" + preguntasSeguridad.getSelectedItem().toString() + "' AND obligatorioDB.PERSONAS.user_id='" + ci.getText() + "' ");
+            PreparedStatement preg = conec.prepareStatement("INSERT INTO PERSONAS_PREGUNTAS(user_id,preg_id,respuesta) VALUES(?,?,?)");
+            if (consulta.next()) {
+                preg.setString(1, consulta.getString("user_id"));
+                preg.setString(2, consulta.getString("preg_id"));
+                preg.setString(3, respuestaPregunta.getText());
+                preg.executeUpdate();
+
+            }
+            Statement obtenerRolSeleccionado = conec.createStatement();
+            ResultSet rol = obtenerRolSeleccionado.executeQuery("SELECT obligatorioDB.ROLES_APLICATIVO.app_id FROM obligatorioDB.ROLES_APLICATIVO WHERE descripcion = '" + comboRoles.getSelectedItem().toString() + "';");
+            String rolDato = "";
+            if (rol.next()) {
+                rolDato = rol.getString("app_id");
+            }
+            String rolCom = comboRoles.getSelectedItem().toString();
+            PreparedStatement permiso = conec.prepareStatement("INSERT INTO obligatorioDB.PERMISOS (user_id,app_id,rol_neg_id,"
+                    + "fecha_solicitud,fecha_autorizacion,estado) VALUES(?,?,?,?,?,?)");
+            permiso.setString(1, ci.getText());
+            permiso.setString(2, rolDato);
+            permiso.setString(3, rolCom);
+            permiso.setString(4, fechaActual());
+            permiso.setString(5, "sinAutorizar");
+            permiso.setString(6, "pendiente");
+            permiso.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "ALTA CORRECTA");
+            limpiar();
+            this.dispose();
+            Loggin login = new Loggin();
+            login.setVisible(true);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Datos Erroneos Reintene", "", JOptionPane.ERROR_MESSAGE);
+            System.out.println(ex);
+        }
+    }
+
     public void cargarPreguntas() {
         String sql = "SELECT * FROM PREGUNTAS ";
 
@@ -29,7 +105,7 @@ public class Formulario_Datos extends javax.swing.JFrame {
             Statement stat = conec.createStatement();
             ResultSet rs = stat.executeQuery(sql);
             while (rs.next()) {
-                preguntasSeguridad.addItem(rs.getString("pregunta"));
+                preguntasSeguridad.addItem(rs.getString("preguntas"));
 
             }
 
@@ -39,13 +115,13 @@ public class Formulario_Datos extends javax.swing.JFrame {
     }
 
     public void cargarRoles() {
-        String sql = "SELECT * FROM ROLES_APLICATIVOS ";
+        String sql = "SELECT * FROM ROLES_APLICATIVO";
 
         try {
             Statement stat = conec.createStatement();
             ResultSet rs = stat.executeQuery(sql);
             while (rs.next()) {
-                comboRoles.addItem(rs.getString("descripcion_rol"));
+                comboRoles.addItem(rs.getString("descripcion"));
 
             }
 
@@ -58,6 +134,7 @@ public class Formulario_Datos extends javax.swing.JFrame {
         initComponents();
         cargarPreguntas();
         cargarRoles();
+        System.out.println(fechaActual());
     }
 
     /**
@@ -70,10 +147,10 @@ public class Formulario_Datos extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        name = new javax.swing.JTextField();
+        apellido = new javax.swing.JTextField();
+        addres = new javax.swing.JTextField();
+        ci = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -84,7 +161,7 @@ public class Formulario_Datos extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         ciudades = new javax.swing.JComboBox<>();
         departamentos = new javax.swing.JComboBox<>();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        hashpwd = new javax.swing.JPasswordField();
         preguntasSeguridad = new javax.swing.JComboBox<>();
         respuestaPregunta = new javax.swing.JTextField();
         comboRoles = new javax.swing.JComboBox<>();
@@ -99,15 +176,15 @@ public class Formulario_Datos extends javax.swing.JFrame {
         jLabel1.setText("FORMULARIO DE DATOS PERSONALES");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                nameActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 200, 30));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 200, 30));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 200, 30));
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 200, 30));
+        getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 200, 30));
+        getContentPane().add(apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 200, 30));
+        getContentPane().add(addres, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 200, 30));
+        getContentPane().add(ci, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 200, 30));
 
         jLabel2.setText("NOMBRE");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
@@ -125,7 +202,12 @@ public class Formulario_Datos extends javax.swing.JFrame {
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
 
         jButton1.setText("ENVIAR DATOS");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 600, 310, 60));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 600, 290, 60));
 
         jLabel7.setText("ROL");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, -1));
@@ -144,9 +226,9 @@ public class Formulario_Datos extends javax.swing.JFrame {
         departamentos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " Seleccione Departamento", "Artigas", " Canelones", " Cerro Largo", " Colonia", " Durazno", " Flores", " Florida", " Lavalleja", " Maldonado", " Montevido", " Paysandú", " Río Negro", " Rivera", " Rocha", " Salto", " San José", " Soriano", " Tacuarembo", " Treinta y Tres" }));
         departamentos.setToolTipText("");
         getContentPane().add(departamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 200, 30));
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, 200, 30));
+        getContentPane().add(hashpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, 200, 30));
 
-        getContentPane().add(preguntasSeguridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 490, 330, 30));
+        getContentPane().add(preguntasSeguridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 490, 200, 30));
         getContentPane().add(respuestaPregunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 540, 210, 30));
 
         getContentPane().add(comboRoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 200, 30));
@@ -157,22 +239,36 @@ public class Formulario_Datos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_nameActionPerformed
 
     private void ciudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciudadesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ciudadesActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+//        if (ci.getText().isEmpty() || name.getText().isEmpty() || apellido.getText().isEmpty() || addres.getText().isEmpty()
+//                || hashpwd.getText().isEmpty() || respuestaPregunta.getText().isEmpty()) {
+//            
+//        } else {
+        ///   System.out.println("algo salio mal");
+        ///   }
+        ingresoFormilario();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField addres;
+    private javax.swing.JTextField apellido;
+    private javax.swing.JTextField ci;
     private javax.swing.JComboBox<String> ciudades;
     private javax.swing.JComboBox<String> comboRoles;
     private javax.swing.JComboBox<String> departamentos;
+    private javax.swing.JPasswordField hashpwd;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -183,11 +279,7 @@ public class Formulario_Datos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField name;
     private javax.swing.JComboBox<String> preguntasSeguridad;
     private javax.swing.JTextField respuestaPregunta;
     // End of variables declaration//GEN-END:variables
