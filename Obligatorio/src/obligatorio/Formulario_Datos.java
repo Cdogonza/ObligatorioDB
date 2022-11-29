@@ -36,8 +36,12 @@ public class Formulario_Datos extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        ciudades = new javax.swing.JComboBox<>();
+        departamentos = new javax.swing.JComboBox<>();
+        jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -50,29 +54,42 @@ public class Formulario_Datos extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 200, 30));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 200, 30));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 200, 30));
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 200, 30));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 200, 30));
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 200, 30));
+        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 200, 30));
+        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 200, 30));
 
         jLabel2.setText("NOMBRE");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
         jLabel3.setText("APELLIDO");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
 
         jLabel4.setText("CEDULA");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
-        jLabel5.setText("TELEFONO");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
+        jLabel5.setText("DIRECCION");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
 
-        jLabel6.setText("CORREO");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
-        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 200, 40));
+        jLabel6.setText("CONTRASEÑA");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
 
         jButton1.setText("ENVIAR DATOS");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 160, 40));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 70, 40));
+
+        jLabel7.setText("CIUDAD");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+
+        jLabel8.setText("DEPARTAMENTO");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
+
+        ciudades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Ciudad", "Montevideo", "Salto", "Ciudad de la Costa", "Paysandú", "Las Piedras", "Rivera", "Maldonado", "Tacuarembó", "Melo", "Mercedes", "Artigas", "Minas", "San José de Mayo", "Durazno", "Florida", "Barros Blancos", "Ciudad del Plata", "San carlos", "Colonia del Sacramento", "Pando", "Treinta y Tres", "Rocha", "Fray Bentos", "Trinidad", "La paz", "Canelones", "Carmelo", "Dolores", "Joven", "Santa Lucía", "Progreso", "Paso de Carrasco", "Río Branco", "Paso de los Toros", "Juan Lacaze", "Bella Unión", "Nueva Helvecia", "Libertad", "Rosario", "Nueva Palmira", "Chuy", "Punta del Este", "Piriápolis", "Salinas", "Parque del Plata", "Lascano", "Castillos", "Tranqueras", "Sarandí del Yí", "San Ramón", "Tarariras", "Pan De Azúcar", "Salsa", "Sarandí Grande", "Atlántida", "José Pedro Varela", "Tala", "Guichón", "Cardona", "San Jacinto", "Toledo", "Vergara", "Santa Rosa", "Florencio Sánchez", "La Paloma", "San Gregorio de Polanco", "Ombúes de Lavalle", "Colonia Valdense", "Cerrillos", "Aiguá", "Migues", "San Bautista" }));
+        getContentPane().add(ciudades, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 200, 30));
+
+        departamentos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " Seleccione Departamento", "Artigas", " Canelones", " Cerro Largo", " Colonia", " Durazno", " Flores", " Florida", " Lavalleja", " Maldonado", " Montevido", " Paysandú", " Río Negro", " Rivera", " Rocha", " Salto", " San José", " Soriano", " Tacuarembo", " Treinta y Tres" }));
+        departamentos.setToolTipText("");
+        getContentPane().add(departamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 200, 30));
+        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 200, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -87,6 +104,8 @@ public class Formulario_Datos extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ciudades;
+    private javax.swing.JComboBox<String> departamentos;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -94,10 +113,12 @@ public class Formulario_Datos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }

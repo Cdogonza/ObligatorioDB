@@ -109,6 +109,8 @@ public class Principal extends javax.swing.JFrame {
         lbliconuser = new javax.swing.JLabel();
         lblname = new javax.swing.JLabel();
         backround = new javax.swing.JLabel();
+        panelJefe = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         panelEmp = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -121,8 +123,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         panelPpal = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        panelJefe = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -168,7 +168,7 @@ public class Principal extends javax.swing.JFrame {
         });
         getContentPane().add(btnEMP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 160, 40));
 
-        btnSalir.setBackground(new java.awt.Color(249, 2, 59));
+        btnSalir.setBackground(new java.awt.Color(249, 2, 58));
         btnSalir.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(0, 0, 0));
         btnSalir.setText("SALIR");
@@ -193,6 +193,15 @@ public class Principal extends javax.swing.JFrame {
         backround.setBackground(new java.awt.Color(0, 101, 169));
         backround.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         getContentPane().add(backround, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 6, 220, 470));
+
+        panelJefe.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("JEFATURA");
+        panelJefe.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 100));
+
+        getContentPane().add(panelJefe, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 600, 470));
 
         panelEmp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -251,17 +260,13 @@ public class Principal extends javax.swing.JFrame {
 
         getContentPane().add(panelAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 570, 470));
 
+        panelPpal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
         jLabel4.setText("BIENVENIDOS");
-        panelPpal.add(jLabel4);
+        panelPpal.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, 0));
 
         getContentPane().add(panelPpal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 600, 470));
-
-        jLabel6.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
-        jLabel6.setText("JEFATURA");
-        panelJefe.add(jLabel6);
-
-        getContentPane().add(panelJefe, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 600, 470));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo-login-web.jpg"))); // NOI18N
         jLabel5.setText("jLabel5");

@@ -4,10 +4,6 @@
  */
 package obligatorio;
 
-import com.mysql.cj.conf.PropertyKey;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Image;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -16,9 +12,6 @@ import java.sql.Statement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -63,9 +56,9 @@ public class Loggin extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(548, 338));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUserActionPerformed(evt);
+        txtUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUserMouseClicked(evt);
             }
         });
         getContentPane().add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 220, 40));
@@ -82,17 +75,9 @@ public class Loggin extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 255));
         jLabel1.setText("Crear Usuario Nuevo");
-        jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jLabel1MouseDragged(evt);
-            }
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel1MouseMoved(evt);
-            }
-        });
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel1MouseExited(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
             }
         });
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, -1, -1));
@@ -104,12 +89,6 @@ public class Loggin extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel3.setText("Usuario:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
-
-        txtPass.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtPassMouseClicked(evt);
-            }
-        });
         getContentPane().add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 220, 40));
 
         jLabel4.setFont(new java.awt.Font("Calibri Light", 0, 36)); // NOI18N
@@ -149,7 +128,9 @@ public class Loggin extends javax.swing.JFrame {
                             ppal.setVisible(true);
                             
                         } else {
-                            JOptionPane.showMessageDialog(null, "ERROR", "LOS DATOS INGRESADOS NO SON CORRECTOS", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null,  "LOS DATOS INGRESADOS NO SON CORRECTOS","ERROR", JOptionPane.ERROR_MESSAGE);
+                            System.out.println(pas);
+                            System.out.println(pass);
                         }
 
                     } while (consulta.next());
@@ -164,6 +145,16 @@ public class Loggin extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnlogginActionPerformed
+
+    private void txtUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserMouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+       this.dispose();
+        Formulario_Datos alta = new Formulario_Datos();
+       alta.setVisible(true);
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
