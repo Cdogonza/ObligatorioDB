@@ -349,7 +349,8 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnJefeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJefeActionPerformed
-        if (!Loggin.rolUser.contains("administrador") || !Loggin.rolUser.contains("jefe")) {
+        
+        if (Loggin.rolUser.contains("encargado") || Loggin.rolUser.contains("empleado")) {
             JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
             ValidacionRol("jefe");
