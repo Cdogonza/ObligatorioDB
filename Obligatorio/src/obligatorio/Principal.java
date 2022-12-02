@@ -412,7 +412,11 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-       
+        int ii = tblUser.getSelectedRow();
+        
+       if(ii==-1){
+        JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario","",JOptionPane.ERROR_MESSAGE);
+        }else{       
         String user = String.valueOf(tblUser.getValueAt(tblUser.getSelectedRow(), 0));
            System.out.println(user);            try{
                
@@ -431,13 +435,21 @@ public final class Principal extends javax.swing.JFrame {
              Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
          }
 
-      
+       }
                   
        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-      try {
+
+             int ii = tblUser.getSelectedRow();
+        
+       if(ii==-1){
+        JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario","",JOptionPane.ERROR_MESSAGE);
+        }else{   
+        
+        
+        try {
         String user = String.valueOf(tblUser.getValueAt(tblUser.getSelectedRow(), 0));
 
         String pass = JOptionPane.showInputDialog("Ingrese su nueva Contraseña");
@@ -452,7 +464,7 @@ public final class Principal extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+       }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

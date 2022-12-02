@@ -132,6 +132,11 @@ public String fechaActual() {
         return fecha;
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int ii = tblUser.getSelectedRow();
+        System.out.println(ii);        
+        if(ii==-1){
+        JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario","",JOptionPane.ERROR_MESSAGE);
+        }else{
         String user = String.valueOf(tblUser.getValueAt(tblUser.getSelectedRow(), 0));
 
         String sql = "UPDATE `obligatorioDB`.`PERMISOS` SET `estado` = 'Aprobado', fecha_autorizacion = '" + fechaActual() + "' WHERE (`user_id` ="
@@ -144,12 +149,17 @@ public String fechaActual() {
         } catch (SQLException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         String user = String.valueOf(tblUser.getValueAt(tblUser.getSelectedRow(), 0));
-        Object seleccion = JOptionPane.showInputDialog(null,
+        int ii = tblUser.getSelectedRow();
+        
+       if(ii==-1){
+        JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario","",JOptionPane.ERROR_MESSAGE);
+        }else{
+           String user = String.valueOf(tblUser.getValueAt(tblUser.getSelectedRow(), 0));
+           Object seleccion = JOptionPane.showInputDialog(null,
                 "Seleccione rol",
                 "Selector de Roles",
                 JOptionPane.QUESTION_MESSAGE,
@@ -182,6 +192,7 @@ public String fechaActual() {
         } catch (SQLException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
+       }
     }//GEN-LAST:event_jButton2ActionPerformed
     /**
      * @param args the command line arguments
