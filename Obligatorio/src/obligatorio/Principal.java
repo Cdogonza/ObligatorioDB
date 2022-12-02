@@ -47,7 +47,6 @@ public final class Principal extends javax.swing.JFrame {
     public void ValidacionRol(String rol)  {
         
        
-        
      if(chekEstado().contains("Aprobado")){       
         if (rol.contains("administrador")) {
             panelEmp.setVisible(false);
@@ -162,22 +161,10 @@ public final class Principal extends javax.swing.JFrame {
         lbliconuser = new javax.swing.JLabel();
         lblname = new javax.swing.JLabel();
         backround = new javax.swing.JLabel();
-        panelJefe = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        btnjefeConsPre1 = new javax.swing.JButton();
-        btnjefeConsStk1 = new javax.swing.JButton();
-        btnjefeRArq1 = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
         panelPpal = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         lblPend = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        panelEnca = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        btnEncConsStk = new javax.swing.JButton();
-        btnEncConsPre = new javax.swing.JButton();
-        btnEncRArq = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
         panelAdmin = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUser = new javax.swing.JTable();
@@ -187,6 +174,18 @@ public final class Principal extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        panelJefe = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        btnjefeConsPre1 = new javax.swing.JButton();
+        btnjefeConsStk1 = new javax.swing.JButton();
+        btnjefeRArq1 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        panelEnca = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        btnEncConsStk = new javax.swing.JButton();
+        btnEncConsPre = new javax.swing.JButton();
+        btnEncRArq = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
         panelEmp = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         btnEmpFact = new javax.swing.JButton();
@@ -271,51 +270,6 @@ public final class Principal extends javax.swing.JFrame {
         backround.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         getContentPane().add(backround, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 6, 220, 470));
 
-        panelJefe.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel6.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("JEFATURA");
-        panelJefe.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 100));
-
-        btnjefeConsPre1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        btnjefeConsPre1.setText("Consultar Precio");
-        btnjefeConsPre1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnjefeConsPre1ActionPerformed(evt);
-            }
-        });
-        panelJefe.add(btnjefeConsPre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 160, 50));
-
-        btnjefeConsStk1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        btnjefeConsStk1.setText("Consultar Stock");
-        btnjefeConsStk1.setMaximumSize(new java.awt.Dimension(60, 26));
-        btnjefeConsStk1.setMinimumSize(new java.awt.Dimension(60, 26));
-        btnjefeConsStk1.setPreferredSize(new java.awt.Dimension(60, 26));
-        btnjefeConsStk1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnjefeConsStk1ActionPerformed(evt);
-            }
-        });
-        panelJefe.add(btnjefeConsStk1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 160, 50));
-
-        btnjefeRArq1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        btnjefeRArq1.setText("Realizar Arqueo");
-        btnjefeRArq1.setMaximumSize(new java.awt.Dimension(122, 26));
-        btnjefeRArq1.setMinimumSize(new java.awt.Dimension(122, 26));
-        btnjefeRArq1.setPreferredSize(new java.awt.Dimension(122, 26));
-        btnjefeRArq1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnjefeRArq1ActionPerformed(evt);
-            }
-        });
-        panelJefe.add(btnjefeRArq1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 160, 50));
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/856f31d9f475501c7552c97dbe727319.jpg"))); // NOI18N
-        panelJefe.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 470));
-
-        getContentPane().add(panelJefe, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 580, 470));
-
         panelPpal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
@@ -332,54 +286,6 @@ public final class Principal extends javax.swing.JFrame {
         panelPpal.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 600, 470));
 
         getContentPane().add(panelPpal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 580, 470));
-
-        panelEnca.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("ENCARGADOS");
-        jLabel7.setMaximumSize(new java.awt.Dimension(201, 59));
-        jLabel7.setMinimumSize(new java.awt.Dimension(201, 59));
-        jLabel7.setPreferredSize(new java.awt.Dimension(201, 59));
-        panelEnca.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 100));
-
-        btnEncConsStk.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        btnEncConsStk.setText("Consultar Stock");
-        btnEncConsStk.setMaximumSize(new java.awt.Dimension(60, 26));
-        btnEncConsStk.setMinimumSize(new java.awt.Dimension(60, 26));
-        btnEncConsStk.setPreferredSize(new java.awt.Dimension(60, 26));
-        btnEncConsStk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEncConsStkActionPerformed(evt);
-            }
-        });
-        panelEnca.add(btnEncConsStk, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 160, 50));
-
-        btnEncConsPre.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        btnEncConsPre.setText("Consultar Precio");
-        btnEncConsPre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEncConsPreActionPerformed(evt);
-            }
-        });
-        panelEnca.add(btnEncConsPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 160, 50));
-
-        btnEncRArq.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        btnEncRArq.setText("Realizar Arqueo");
-        btnEncRArq.setMaximumSize(new java.awt.Dimension(122, 26));
-        btnEncRArq.setMinimumSize(new java.awt.Dimension(122, 26));
-        btnEncRArq.setPreferredSize(new java.awt.Dimension(122, 26));
-        btnEncRArq.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEncRArqActionPerformed(evt);
-            }
-        });
-        panelEnca.add(btnEncRArq, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 160, 50));
-
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/856f31d9f475501c7552c97dbe727319.jpg"))); // NOI18N
-        panelEnca.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 470));
-
-        getContentPane().add(panelEnca, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 580, 470));
 
         panelAdmin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -439,6 +345,99 @@ public final class Principal extends javax.swing.JFrame {
         panelAdmin.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 180, 40));
 
         getContentPane().add(panelAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 570, 470));
+
+        panelJefe.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("JEFATURA");
+        panelJefe.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 100));
+
+        btnjefeConsPre1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnjefeConsPre1.setText("Consultar Precio");
+        btnjefeConsPre1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnjefeConsPre1ActionPerformed(evt);
+            }
+        });
+        panelJefe.add(btnjefeConsPre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 160, 50));
+
+        btnjefeConsStk1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnjefeConsStk1.setText("Consultar Stock");
+        btnjefeConsStk1.setMaximumSize(new java.awt.Dimension(60, 26));
+        btnjefeConsStk1.setMinimumSize(new java.awt.Dimension(60, 26));
+        btnjefeConsStk1.setPreferredSize(new java.awt.Dimension(60, 26));
+        btnjefeConsStk1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnjefeConsStk1ActionPerformed(evt);
+            }
+        });
+        panelJefe.add(btnjefeConsStk1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 160, 50));
+
+        btnjefeRArq1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnjefeRArq1.setText("Realizar Arqueo");
+        btnjefeRArq1.setMaximumSize(new java.awt.Dimension(122, 26));
+        btnjefeRArq1.setMinimumSize(new java.awt.Dimension(122, 26));
+        btnjefeRArq1.setPreferredSize(new java.awt.Dimension(122, 26));
+        btnjefeRArq1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnjefeRArq1ActionPerformed(evt);
+            }
+        });
+        panelJefe.add(btnjefeRArq1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 160, 50));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/856f31d9f475501c7552c97dbe727319.jpg"))); // NOI18N
+        panelJefe.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 470));
+
+        getContentPane().add(panelJefe, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 580, 470));
+
+        panelEnca.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("ENCARGADOS");
+        jLabel7.setMaximumSize(new java.awt.Dimension(201, 59));
+        jLabel7.setMinimumSize(new java.awt.Dimension(201, 59));
+        jLabel7.setPreferredSize(new java.awt.Dimension(201, 59));
+        panelEnca.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 100));
+
+        btnEncConsStk.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnEncConsStk.setText("Consultar Stock");
+        btnEncConsStk.setMaximumSize(new java.awt.Dimension(60, 26));
+        btnEncConsStk.setMinimumSize(new java.awt.Dimension(60, 26));
+        btnEncConsStk.setPreferredSize(new java.awt.Dimension(60, 26));
+        btnEncConsStk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEncConsStkActionPerformed(evt);
+            }
+        });
+        panelEnca.add(btnEncConsStk, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 160, 50));
+
+        btnEncConsPre.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnEncConsPre.setText("Consultar Precio");
+        btnEncConsPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEncConsPreActionPerformed(evt);
+            }
+        });
+        panelEnca.add(btnEncConsPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 160, 50));
+
+        btnEncRArq.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnEncRArq.setText("Realizar Arqueo");
+        btnEncRArq.setMaximumSize(new java.awt.Dimension(122, 26));
+        btnEncRArq.setMinimumSize(new java.awt.Dimension(122, 26));
+        btnEncRArq.setPreferredSize(new java.awt.Dimension(122, 26));
+        btnEncRArq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEncRArqActionPerformed(evt);
+            }
+        });
+        panelEnca.add(btnEncRArq, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 160, 50));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/856f31d9f475501c7552c97dbe727319.jpg"))); // NOI18N
+        panelEnca.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 470));
+
+        getContentPane().add(panelEnca, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 580, 470));
 
         panelEmp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

@@ -29,7 +29,9 @@ public class preguntas_usuarios extends javax.swing.JFrame {
         String[] registros = new String[4];
         try {
             Statement stat = conec.createStatement();
-            String consulta = "SELECT obligatorioDB.PERSONAS.user_id, obligatorioDB.PERSONAS.nombres,obligatorioDB.PERSONAS.apellidos, obligatorioDB.PERSONAS_PREGUNTAS.respuesta FROM obligatorioDB.PERSONAS INNER JOIN obligatorioDB.PERSONAS_PREGUNTAS ON preg_id AND obligatorioDB.PERSONAS.user_id=obligatorioDB.PERSONAS_PREGUNTAS.user_id  ;";
+            String consulta = "SELECT PER.user_id, PER.nombres,PER.apellidos, PER_PREG.respuesta "
+                    + "FROM obligatorioDB.PERSONAS AS PER INNER JOIN obligatorioDB.PERSONAS_PREGUNTAS AS PER_PREG "
+                    + "ON preg_id AND PER.user_id=PER_PREG.user_id  ;";
             ResultSet rs = stat.executeQuery(consulta);
             while (rs.next()) {
                 registros[0] = rs.getString("user_id");
@@ -66,7 +68,6 @@ public class preguntas_usuarios extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(838, 369));
         setMinimumSize(new java.awt.Dimension(838, 369));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

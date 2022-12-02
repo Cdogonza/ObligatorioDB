@@ -167,7 +167,7 @@ public class Loggin extends javax.swing.JFrame {
     }
     private void btnlogginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlogginActionPerformed
         if (txtUser.getText().isEmpty() || txtPass.getText().isEmpty()) {
-            System.out.println("DEBE INGRESAR USUARIO Y PASSWORD");
+            JOptionPane.showMessageDialog(null,"DEBE INGRESAR USUARIO Y CONTRASEÑA","Error",JOptionPane.ERROR_MESSAGE);
         } else {
             String user = txtUser.getText().toUpperCase();
             String pass = hashPwd(txtPass.getText());
