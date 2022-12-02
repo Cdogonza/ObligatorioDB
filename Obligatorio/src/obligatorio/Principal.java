@@ -156,6 +156,7 @@ public final class Principal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         panelEmp = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -285,6 +286,14 @@ public final class Principal extends javax.swing.JFrame {
             }
         });
         panelAdmin.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 170, 50));
+
+        jButton6.setText("VISUALIZAR PREGUNTAS");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        panelAdmin.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 180, 40));
 
         getContentPane().add(panelAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 570, 470));
 
@@ -446,6 +455,12 @@ public final class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        preguntas_usuarios verPreguntas = new preguntas_usuarios();
+        verPreguntas.setVisible(true);
+
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -462,6 +477,7 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
