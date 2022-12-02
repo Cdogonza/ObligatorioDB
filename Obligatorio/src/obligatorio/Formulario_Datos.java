@@ -132,6 +132,7 @@ public class Formulario_Datos extends javax.swing.JFrame {
 
     public Formulario_Datos() {
         initComponents();
+        this.setLocationRelativeTo(null);
         cargarPreguntas();
         cargarRoles();
         System.out.println(fechaActual());

@@ -98,6 +98,7 @@ public class RecuperacionPassword extends javax.swing.JFrame {
                 if (answ.contains(resp)) {
 
                     String pass = JOptionPane.showInputDialog("Respuesta Correcta, ingrese su nueva Contraseña");
+                    
                     String sql = "UPDATE `obligatorioDB`.`PERSONAS` SET `hashpwd` = '" + Loggin.hashPwd(pass) + "' WHERE (`user_id` ="
                             + " '" + Loggin.ci + "')";
                     PreparedStatement pst = conec.prepareStatement(sql);

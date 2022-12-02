@@ -64,14 +64,15 @@ public final class Principal extends javax.swing.JFrame {
             panelJefe.setVisible(true);
             lblPend.setVisible(false);
         }
-        if (rol.contains("encargado")) {
+        if (rol.contains("empleado")) {
             panelAdmin.setVisible(false);
             panelJefe.setVisible(false);
             panelPpal.setVisible(false);
             panelEmp.setVisible(true);
             lblPend.setVisible(false);
         }
-     }else{
+     }
+     if(chekEstado().contains("pendiente")){
         
             panelAdmin.setVisible(false);
             panelJefe.setVisible(false);
@@ -117,7 +118,10 @@ public final class Principal extends javax.swing.JFrame {
         panelEmp.setVisible(false);
         panelPpal.setVisible(true);
         panelJefe.setVisible(false);
-        lblPend.setVisible(false);
+        if(chekEstado().contains("pendiente")){
+            lblPend.setVisible(true);
+        }else lblPend.setVisible(false);
+        
 
     }
 
@@ -151,16 +155,17 @@ public final class Principal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        panelPpal = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        lblPend = new javax.swing.JLabel();
-        panelJefe = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
         panelEmp = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        panelPpal = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        lblPend = new javax.swing.JLabel();
+        panelJefe = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -271,32 +276,17 @@ public final class Principal extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        panelAdmin.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 140, 50));
+        panelAdmin.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, 140, 50));
+
+        jButton5.setText("RESETEAR PASSWORD");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        panelAdmin.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 170, 50));
 
         getContentPane().add(panelAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 570, 470));
-
-        panelPpal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel4.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("BIENVENIDOS");
-        panelPpal.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 590, 60));
-
-        lblPend.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
-        lblPend.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblPend.setText("Autorización Pendiente");
-        panelPpal.add(lblPend, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 590, 60));
-
-        getContentPane().add(panelPpal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 580, 470));
-
-        panelJefe.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel6.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("JEFATURA");
-        panelJefe.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 100));
-
-        getContentPane().add(panelJefe, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 580, 470));
 
         panelEmp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -328,6 +318,29 @@ public final class Principal extends javax.swing.JFrame {
 
         getContentPane().add(panelEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 580, 470));
 
+        panelPpal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("BIENVENIDOS");
+        panelPpal.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 590, 60));
+
+        lblPend.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
+        lblPend.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPend.setText("Autorización Pendiente");
+        panelPpal.add(lblPend, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 590, 60));
+
+        getContentPane().add(panelPpal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 580, 470));
+
+        panelJefe.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("JEFATURA");
+        panelJefe.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 100));
+
+        getContentPane().add(panelJefe, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 580, 470));
+
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo-login-web.jpg"))); // NOI18N
         jLabel5.setText("jLabel5");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 500));
@@ -349,7 +362,7 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnJefeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJefeActionPerformed
-        if (!Loggin.rolUser.contains("administrador") || !Loggin.rolUser.contains("jefe")) {
+        if (Loggin.rolUser.contains("encargado") || Loggin.rolUser.contains("empleado")) {
             JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
             ValidacionRol("jefe");
@@ -359,10 +372,11 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnJefeActionPerformed
 
     private void btnEMP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEMP1ActionPerformed
-        if (!Loggin.rolUser.contains("encargado") || !Loggin.rolUser.contains("administrador")) {
+        if (Loggin.rolUser.contains("jefe") || Loggin.rolUser.contains("encargado")) {
             JOptionPane.showMessageDialog(null, "NO TIENE PERMISO PARA INGRESAR A ESTA AREA", "ERROR", JOptionPane.ERROR_MESSAGE);
-        } else
-            ValidacionRol("encargado");
+        } else {
+            ValidacionRol("empleado");
+        }
     }//GEN-LAST:event_btnEMP1ActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -413,6 +427,25 @@ public final class Principal extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+      try {
+        String user = String.valueOf(tblUser.getValueAt(tblUser.getSelectedRow(), 0));
+
+        String pass = JOptionPane.showInputDialog("Ingrese su nueva Contraseña");
+         String sql = "UPDATE `obligatorioDB`.`PERSONAS` SET `hashpwd` = '" + Loggin.hashPwd(pass) + "' WHERE (`user_id` ="
+                            + " '" + user + "')";
+ 
+        
+            PreparedStatement pst = conec.prepareStatement(sql);
+            pst.executeUpdate();
+
+            cargarUsers();
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -428,6 +461,7 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
