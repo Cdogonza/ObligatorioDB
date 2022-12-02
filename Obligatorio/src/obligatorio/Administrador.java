@@ -4,7 +4,6 @@
  */
 package obligatorio;
 
-import java.sql.Connection;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +22,7 @@ import javax.swing.JOptionPane;
  * @author gpaz1
  */
 public class Administrador extends javax.swing.JFrame {
-
+    public  String app_id ="";
     /**
      * Creates new form Adminstrador
      */
@@ -112,15 +111,25 @@ public class Administrador extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+<<<<<<< HEAD
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 180, 40));
 
         jButton2.setText("Modificar Rol");
+=======
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 180, 40));
+
+        jButton2.setText("EDITAR PERMISO");
+>>>>>>> origin/no_lo_rompo
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+<<<<<<< HEAD
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, 170, 40));
+=======
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 280, 180, 40));
+>>>>>>> origin/no_lo_rompo
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo-login-web.jpg"))); // NOI18N
         jLabel3.setText("jLabel3");
@@ -134,6 +143,11 @@ public String fechaActual() {
         return fecha;
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int ii = tblUser.getSelectedRow();
+        System.out.println(ii);        
+        if(ii==-1){
+        JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario","",JOptionPane.ERROR_MESSAGE);
+        }else{
         String user = String.valueOf(tblUser.getValueAt(tblUser.getSelectedRow(), 0));
 
         String sql = "UPDATE `obligatorioDB`.`PERMISOS` SET `estado` = 'Aprobado', fecha_autorizacion = '" + fechaActual() + "' WHERE (`user_id` ="
@@ -146,13 +160,23 @@ public String fechaActual() {
         } catch (SQLException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+<<<<<<< HEAD
         
         String user = String.valueOf(tblUser.getValueAt(tblUser.getSelectedRow(), 0));
         Object seleccion = JOptionPane.showInputDialog(null,
+=======
+        int ii = tblUser.getSelectedRow();
+        
+       if(ii==-1){
+        JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario","",JOptionPane.ERROR_MESSAGE);
+        }else{
+           String user = String.valueOf(tblUser.getValueAt(tblUser.getSelectedRow(), 0));
+           Object seleccion = JOptionPane.showInputDialog(null,
+>>>>>>> origin/no_lo_rompo
                 "Seleccione rol",
                 "Selector de Roles",
                 JOptionPane.QUESTION_MESSAGE,
@@ -180,11 +204,19 @@ public String fechaActual() {
         try {
             PreparedStatement pst = conec.prepareStatement(sql);
             pst.executeUpdate();
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> origin/no_lo_rompo
             cargarUsers();
         } catch (SQLException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
+<<<<<<< HEAD
+=======
+       }
+>>>>>>> origin/no_lo_rompo
     }//GEN-LAST:event_jButton2ActionPerformed
     /**
      * @param args the command line arguments
